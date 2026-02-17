@@ -22,6 +22,7 @@ Cette activité permet aux étudiants en sciences de la santé de découvrir la 
     <strong>🚀 Lancer l'activité interactive</strong>
   </a>
 </p>
+
 ---
 
 ## 📚 Contexte historique
