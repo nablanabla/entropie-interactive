@@ -11,19 +11,9 @@
 
 Cette activité permet aux étudiants en sciences de la santé de découvrir la théorie de l'information de Claude Shannon et son application dans le domaine de l'intelligence artificielle.
 
-**Public cible :** Étudiants en médecine - Faculté de Médecine, Université Laval
 
 ---
 
-## 🌐 Accès à l'activité
-
-<p align="center">
-  <a href="https://nablanabla.github.io/entropie-interactive/" target="_blank" rel="noopener noreferrer">
-    <strong>🚀 Lancer l'activité interactive</strong>
-  </a>
-</p>
-
----
 
 ## 📚 Contexte historique
 
@@ -62,6 +52,17 @@ L'activité se compose de **7 sections progressives** :
 7. **Synthèse** - Récapitulatif et ouvertures
 
 ---
+
+## 🌐 Accès à l'activité
+
+<p align="center">
+  <a href="https://nablanabla.github.io/entropie-interactive/" target="_blank" rel="noopener noreferrer">
+    <strong>🚀 Lancer l'activité interactive</strong>
+  </a>
+</p>
+
+---
+
 
 ## 🎓 Utilisation pédagogique
 
