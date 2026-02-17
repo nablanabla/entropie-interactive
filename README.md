@@ -17,8 +17,13 @@ Cette activité permet aux étudiants en sciences de la santé de découvrir la 
 
 ## 🌐 Accès à l'activité
 
-**[→ Lancer l'activité interactive](https://nablanabla.github.io/entropie-interactive/)**
+**[→ Lancer l'activité interactive]()**
 
+<p align="center">
+  <a href="https://nablanabla.github.io/entropie-interactive/" target="_blank">
+    <strong>🚀 Lancer l'activité interactive</strong>
+  </a>
+</p>
 ---
 
 ## 📚 Contexte historique
