@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Découvrir l'Entropie - Activité Interactive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --text: #f1f1f1;
+            --text-dim: #a8a8b3;
+            --card-bg: #0f3460;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--warning));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--warning));
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section.completed {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .scenario {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .gobelets-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .gobelet {
+            width: 80px;
+            height: 100px;
+            background: linear-gradient(180deg, #ff6b9d 0%, #c44569 100%);
+            border-radius: 0 0 40px 40px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .gobelet:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        .gobelet.selected {
+            background: linear-gradient(180deg, var(--success) 0%, #04a777 100%);
+            animation: pulse 0.6s ease-out;
+        }
+
+        .gobelet-label {
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .probability {
+            position: absolute;
+            bottom: -30px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-family: 'Space Mono', monospace;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .question-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.15);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.15);
+            animation: correctAnswer 0.6s ease-out;
+        }
+
+        .option.incorrect {
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.25);
+            animation: shake 0.5s;
+        }
+
+        @keyframes correctAnswer {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .option-letter {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .option.correct .option-letter {
+            background: var(--success);
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--accent), #c44569);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Crimson Pro', serif;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            margin-top: 1.5rem;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .feedback {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .feedback.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feedback.success {
+            background: rgba(6, 214, 160, 0.15);
+            border-left: 4px solid var(--success);
+        }
+
+        .feedback.error {
+            background: rgba(233, 69, 96, 0.15);
+            border-left: 4px solid var(--accent);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(233, 69, 96, 0.2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .input-field {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Space Mono', monospace;
+            width: 100%;
+            max-width: 150px;
+            transition: var(--transition);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .formula-box {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px solid var(--warning);
+            text-align: center;
+        }
+
+        .formula {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--warning);
+            margin: 1rem 0;
+            font-weight: 700;
+        }
+
+        .decision-tree {
+            font-family: 'Space Mono', monospace;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            white-space: pre;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            border-left: 4px solid var(--success);
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(255, 209, 102, 0.2));
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: celebrate 1s ease-out;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-10deg); }
+            75% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-box {
+            background: rgba(255, 209, 102, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box strong {
+            color: var(--warning);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .gobelet {
+                width: 60px;
+                height: 80px;
+            }
+
+            .formula {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Découvrir l'Entropie</h1>
+            <p class="subtitle">Le jeu des gobelets</p>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <div class="section active" id="section1">
+            <h2>🎯 Mise en situation</h2>
+            <div class="scenario">
+                <p><strong>Le jeu :</strong> Une balle est cachée sous l'un de plusieurs gobelets. Vous devez la trouver en posant des questions à un informateur qui connaît l'emplacement de la balle mais qui ne sait répondre que par <strong>OUI</strong> ou par <strong>NON</strong>.</p>
+                <p style="margin-top: 1rem;"> Votre objectif est de <strong> minimiser le nombre de questions nécessaires. </strong> </p>
+                <p style="margin-top: 1rem;"> <strong> Analogie scientifique :</strong> trouver la bonne hypothèse en minimisant le nombre d'expérience. </p>  
+                <p style="margin-top: 1rem;"> <strong> Analogie médicale : </strong> trouver la pathologie en minimisant le nombre de test.   </p>
+            </div>
+            <button class="button" onclick="nextSection(2)">Commencer l'exploration →</button>
+        </div>
+
+        <!-- Section 2: 2 gobelets -->
+        <div class="section" id="section2">
+            <h2>Partie 1 : Cas équiprobable</h2>
+            <h3>Étape 1 : 2 gobelets</h3>
+            <p>La balle est sous l'un des deux gobelets avec une probabilité p = 0,5 pour chacun.</p>
+            
+            <div class="gobelets-container">
+                <div class="gobelet">
+                    <span class="gobelet-label">A</span>
+                    <span class="probability">p = 1/2</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">B</span>
+                    <span class="probability">p = 1/2</span>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p class="question-text">Combien de questions minimum devez-vous poser pour localiser la balle ?</p>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q1', false)">
+                        <span class="option-letter">A</span>
+                        <span>0 question </span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q1', true)">
+                        <span class="option-letter">B</span>
+                        <span>1 question </span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q1', false)">
+                        <span class="option-letter">C</span>
+                        <span>2 questions</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q1"></div>
+            </div>
+            <button class="button" id="btn-section2" disabled onclick="nextSection(3)">Continuer →</button>
+        </div>
+
+        <!-- Section 3: 4 gobelets -->
+        <div class="section" id="section3">
+            <h3>Étape 2 : 4 gobelets</h3>
+            <p>La balle est maintenant sous l'un des quatre gobelets avec une probabilité p = 0,25 pour chacun.</p>
+            
+            <div class="gobelets-container">
+                <div class="gobelet">
+                    <span class="gobelet-label">A</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">B</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">C</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">D</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p class="question-text">Combien de questions minimum sont nécessaires ?</p>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q2', false)">
+                        <span class="option-letter">A</span>
+                        <span>1 question</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2', true)">
+                        <span class="option-letter">B</span>
+                        <span>2 questions </span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2', false)">
+                        <span class="option-letter">C</span>
+                        <span>3 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q2', false)">
+                        <span class="option-letter">D</span>
+                        <span>4 questions</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q2"></div>
+            </div>
+            <button class="button" id="btn-section3" disabled onclick="nextSection(4)">Continuer →</button>
+        </div>
+
+        <!-- Section 4: 8 gobelets -->
+        <div class="section" id="section4">
+            <h3>Étape 3 : 8 gobelets</h3>
+            <p>La balle est maintenant sous l'un des huit gobelets avec une probabilité p = 0,125 pour chacun.</p>
+            
+            <div class="gobelets-container">
+                <div class="gobelet">
+                    <span class="gobelet-label">A</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">B</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">C</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">D</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">E</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">F</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">G</span>
+                    <span class="probability">1/8</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">H</span>
+                    <span class="probability">1/8</span>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p class="question-text">Combien de questions minimum sont nécessaires ?</p>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q3', false)">
+                        <span class="option-letter">A</span>
+                        <span>2 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3', true)">
+                        <span class="option-letter">B</span>
+                        <span>3 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3', false)">
+                        <span class="option-letter">C</span>
+                        <span>4 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q3', false)">
+                        <span class="option-letter">D</span>
+                        <span>8 questions</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q3"></div>
+            </div>
+            <button class="button" id="btn-section4" disabled onclick="nextSection(5)">Continuer →</button>
+        </div>
+
+        <!-- Section 5: Synthèse et formule -->
+        <div class="section" id="section5">
+            <h2>Synthèse : La formule apparaît !</h2>
+            <p>Observez le tableau récapitulatif :</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre de gobelets (n)</th>
+                            <th>Probabilité (p)</th>
+                            <th>Questions minimum</th>
+                            <th>Relation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2</td>
+                            <td>1/2</td>
+                            <td>1</td>
+                            <td>2=2<sup>1</sup></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>1/4</td>
+                            <td>2</td>
+                            <td>4=2<sup>2</sup></td>>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>1/8</td>
+                            <td>3</td>
+                            <td>8=2<sup>3</sup></td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>1/16</td>
+                            <td>4</td>
+                            <td>16=2<sup>4</sup></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="question-box">
+                <p class="question-text">Quelle formule relie le nombre de questions à la probabilité p ?</p>
+                 <p style="margin-top: 1rem;"> <strong> Explication du symbole log₂(x) :</strong> c'est une formule qui permet d'extraire la puissance lorsqu'un nombre x est écrit en base 2. </p>
+                 <p style="margin-top: 1rem;"> <strong> Exemple:</strong> log₂(2<sup>1</sup>)=1, log₂(2<sup>2</sup>)=2 , log₂(2<sup>3</sup>)=3,...log₂(2<sup>n</sup>)=n<div class="etc"></div> 
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q4', false)">
+                        <span class="option-letter">A</span>
+                        <span>Nombre de questions = p</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4', false)">
+                        <span class="option-letter">B</span>
+                        <span>Nombre de questions = 1/p</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4', true)">
+                        <span class="option-letter">C</span>
+                        <span>Nombre de questions = -log₂(p)</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q4', false)">
+                        <span class="option-letter">D</span>
+                        <span>Nombre de questions = log₂(p)</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q4"></div>
+            </div>
+
+            <div class="formula-box" style="display: none;" id="formulaReveal">
+                <p><strong>🎉 Formule de l'information de Shannon :</strong></p>
+                <div class="formula">H(x) = -log₂(p)</div>
+                <p style="margin-top: 1rem;">Lorsque tous les événements sont équiprobables, l'information nécessaire pour localiser la balle est <strong>-log₂(p)</strong> bits.</p>
+            </div>
+            <div class="formula-box" style="display: none;" id="formulaReveal">
+                <p><strong>🎉 Formule de l'information de Shannon :</strong></p>
+                <div class="formula">H(x) = -log₂(p)</div>
+                <p style="margin-top: 1rem;">Lorsque tous les événements sont équiprobables, l'information nécessaire pour localiser la balle est <strong>-log₂(p)</strong> bits.</p>
+            </div>
+
+            <!-- AJOUTEZ CETTE SECTION ICI -->
+            <div style="background: rgba(0, 0, 0, 0.3); padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+                <h3 style="color: var(--success); margin-top: 0;">📊 Visualisation de la fonction</h3>
+                
+                <div style="text-align: center; margin: 1.5rem 0;">
+                    <canvas id="entropyGraph" width="600" height="400" style="max-width: 100%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); background: white;"></canvas>
+                </div>
+                
+                <div class="info-box">
+                    <p><strong>💡 Interprétation :</strong></p>
+                    <p style="margin-top: 0.5rem;">
+                        Plus la probabilité <math><mi>p</mi></math> est <strong>petite</strong>, 
+                        plus l'information nécessaire <math><mo>-</mo><msub><mo>log</mo><mn>2</mn></msub><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow></math> 
+                        est <strong>grande</strong>.
+                    </p>
+                    <p style="margin-top: 1rem;">
+                        Autrement dit : un événement rare (<math><mi>p</mi></math> faible) apporte <strong>beaucoup d'information</strong> quand il se produit, 
+                        tandis qu'un événement très probable (<math><mi>p</mi></math> proche de 1) apporte <strong>peu d'information</strong>.
+                    </p>
+                </div>
+            </div>
+
+            <button class="button" id="btn-section5" disabled onclick="nextSection(6)">Passer aux cas non équiprobables →</button>
+            <button class="button" id="btn-section5" disabled onclick="nextSection(6)">Passer aux cas non équiprobables →</button>
+        </div>
+
+        <!-- Section 6: Cas non équiprobable -->
+        <div class="section" id="section6">
+            <h2>Partie 2 : Cas non équiprobable</h2>
+            <h3>3 gobelets avec probabilités inégales</h3>
+            <p>Maintenant, la balle n'est plus également répartie :</p>
+            
+            <div class="gobelets-container">
+                <div class="gobelet">
+                    <span class="gobelet-label">A</span>
+                    <span class="probability">p = 1/2</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">B</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+                <div class="gobelet">
+                    <span class="gobelet-label">C</span>
+                    <span class="probability">p = 1/4</span>
+                </div>
+            </div>
+
+   
+    <!-- Bouton pour afficher l'indice -->
+    <button class="button" style="background: linear-gradient(135deg, var(--warning), #f4a261); margin-bottom: 1.5rem;" onclick="showHint()">
+        💡 Afficher un indice
+    </button>
+
+    <!-- Info-box et arbre cachés par défaut -->
+    <div class="info-box" id="hint-box" style="display: none;">
+        <strong>Stratégie optimale :</strong> Commencer par le gobelet le plus probable !
+    </div>
+
+    <div class="decision-tree" id="decision-tree" style="display: none;">
+        Est-ce A ?
+        /        \
+     OUI          NON
+      |            |
+      A        Est-ce B ?
+(1 question)   /    \
+            OUI      NON
+             |        |
+             B        C
+      (2 questions) (2 questions)
+    </div>
+
+            <div class="question-box">
+                <p class="question-text">Quel est le nombre MOYEN de questions nécessaires avec cette stratégie ?</p>
+                <p style="font-size: 0.95rem; color: var(--text-dim); margin-top: 0.5rem;">
+                    Indice : Calculez (1/2 × 1) + (1/4 × 2) + (1/4 × 2)
+                </p>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q5', false)">
+                        <span class="option-letter">A</span>
+                        <span>1 question</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5', true)">
+                        <span class="option-letter">B</span>
+                        <span>1,5 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5', false)">
+                        <span class="option-letter">C</span>
+                        <span>2 questions</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q5', false)">
+                        <span class="option-letter">D</span>
+                        <span>3 questions</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q5"></div>
+            </div>
+
+            <button class="button" id="btn-section6" disabled onclick="nextSection(7)">Comprendre l'entropie →</button>
+        </div>
+
+        <!-- Section 7: Entropie finale -->
+        <div class="section" id="section7">
+            <h2>🎓 L'Entropie de Shannon</h2>
+            
+            <div class="info-box">
+                <p><strong>L'entropie</strong> mesure le nombre moyen de questions (en bits) nécessaires pour identifier un événement parmi plusieurs possibilités.</p>
+            </div>
+
+            <div class="formula-box">
+    <p><strong>Formule générale de l'entropie :</strong></p>
+    <div class="formula" style="font-size: 2rem; margin: 2rem 0;">
+        <math display="block">
+            <mi>H</mi>
+            <mrow>
+                <mo>(</mo>
+                <mi>X</mi>
+                <mo>)</mo>
+            </mrow>
+            <mo>=</mo>
+            <mo>-</mo>
+            <munder>
+                <mo>∑</mo>
+                <mi>i</mi>
+            </munder>
+            <msub>
+                <mi>p</mi>
+                <mi>i</mi>
+            </msub>
+            <mo>×</mo>
+            <msub>
+                <mo>log</mo>
+                <mn>2</mn>
+            </msub>
+            <mrow>
+                <mo>(</mo>
+                <msub>
+                    <mi>p</mi>
+                    <mi>i</mi>
+                </msub>
+                <mo>)</mo>
+            </mrow>
+        </math>
+    </div>
+    <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+        où <math><msub><mi>p</mi><mi>i</mi></msub></math> est la probabilité de chaque événement <math><mi>i</mi></math>
+    </p>
+    
+    <div style="background: rgba(255, 209, 102, 0.1); padding: 1.5rem; border-radius: 10px; margin-top: 2rem; border-left: 4px solid var(--warning);">
+        <p><strong>🔍 Cas particulier :</strong></p>
+        <p style="margin-top: 0.5rem;">
+            Si tous les <math><msub><mi>p</mi><mi>i</mi></msub></math> sont égaux 
+            (<math><msub><mi>p</mi><mi>i</mi></msub> <mo>=</mo> <mfrac><mn>1</mn><mi>n</mi></mfrac></math>), 
+            on retrouve :
+        </p>
+        <div style="font-size: 1.5rem; margin: 1rem 0; text-align: center; color: var(--warning); font-family: 'Space Mono', monospace;">
+            <math display="block">
+                <mi>H</mi>
+                <mrow>
+                    <mo>(</mo>
+                    <mi>X</mi>
+                    <mo>)</mo>
+                </mrow>
+                <mo>=</mo>
+                <msub>
+                    <mo>log</mo>
+                    <mn>2</mn>
+                </msub>
+                <mrow>
+                    <mo>(</mo>
+                    <mi>n</mi>
+                    <mo>)</mo>
+                </mrow>
+                <mo>=</mo>
+                <mo>-</mo>
+                <msub>
+                    <mo>log</mo>
+                    <mn>2</mn>
+                </msub>
+                <mrow>
+                    <mo>(</mo>
+                    <mi>p</mi>
+                    <mo>)</mo>
+                </mrow>
+            </math>
+        </div>
+        <p style="color: var(--text-dim); font-size: 0.95rem;">
+            C'est la formule que nous avons découverte avec les gobelets équiprobables !
+        </p>
+    </div>
+</div>
+
+            <div class="question-box">
+                <p class="question-text">Que signifie une entropie élevée ?</p>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this, 'q6', false)">
+                        <span class="option-letter">A</span>
+                        <span>Les événements sont très prévisibles</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6', true)">
+                        <span class="option-letter">B</span>
+                        <span>Il y a beaucoup d'incertitude, les événements sont équiprobables</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6', false)">
+                        <span class="option-letter">C</span>
+                        <span>Un seul événement est possible</span>
+                    </div>
+                    <div class="option" onclick="selectOption(this, 'q6', false)">
+                        <span class="option-letter">D</span>
+                        <span>Le système est en équilibre</span>
+                    </div>
+                </div>
+                <div class="feedback" id="feedback-q6"></div>
+            </div>
+
+            <div class="info-box" style="display: none;" id="connexionIA">
+                <h3 style="color: var(--warning); margin-top: 0;">🤖 Connexion avec l'IA</h3>
+                <p>Cette formalisation de l'information devient le socle des modèles de langage actuels comme GPT !</p>
+                <p style="margin-top: 1rem;">Les modèles sont entraînés à <strong>minimiser l'entropie croisée</strong>, c'est-à-dire à maximiser la probabilité des mots qui apparaissent dans les textes.</p>
+                <p style="margin-top: 1rem;">La <strong>perplexité</strong>, métrique standard pour évaluer un modèle de langage, est directement dérivée de l'entropie : <span class="formula" style="font-size: 1.2rem;">Perplexité = 2^H(X)</span></p>
+            </div>
+
+            <button class="button" id="btn-section7" disabled onclick="completeActivity()">Terminer l'activité →</button>
+        </div>
+
+        <!-- Section finale -->
+        <div class="section" id="completion" style="display: none;">
+            <div class="completion-message">
+                <div class="completion-icon">🎉</div>
+                <h2 style="color: var(--success);">Félicitations !</h2>
+                <p style="margin-top: 1rem; font-size: 1.2rem;">Vous avez découvert le concept d'entropie et la théorie de l'information de Shannon à travers un jeu simple.</p>
+                <p style="margin-top: 1rem;">Vous comprenez maintenant comment mesurer l'information et pourquoi cette notion est fondamentale en informatique, en IA et en sciences de la communication.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        let totalSections = 7;
+        let correctAnswers = 0;
+        
+        const answers = {
+            q1: { correct: false, answered: false },
+            q2: { correct: false, answered: false },
+            q3: { correct: false, answered: false },
+            q4: { correct: false, answered: false },
+            q5: { correct: false, answered: false },
+            q6: { correct: false, answered: false }
+        };
+
+        const feedbackMessages = {
+            q1: {
+                correct: "✅ Exact ! Avec 2 gobelets, une seule question suffit : 'Est-ce A ?' Si OUI → A, si NON → B.",
+                incorrect: "❌ Réessayez ! Pensez à la stratégie la plus simple : diviser l'espace de recherche en deux."
+            },
+            q2: {
+                correct: "✅ Parfait ! Question 1 : 'A ou B ?' puis Question 2 selon la réponse. C'est la recherche dichotomique !",
+                incorrect: "❌ Pas tout à fait. Pensez à diviser le problème en deux à chaque étape : 4 → 2 → 1."
+            },
+            q3: {
+                correct: "✅ Bravo ! 8 gobelets nécessitent 3 questions : 8 → 4 → 2 → 1. Vous voyez le pattern ?",
+                incorrect: "❌ Réfléchissez au schéma : à chaque question, vous divisez par 2 les possibilités."
+            },
+            q4: {
+                correct: "✅ Excellent ! Vous avez découvert la formule de Shannon : I = -log₂(p). Le signe négatif vient du fait que p < 1.",
+                incorrect: "❌ Observez bien le tableau : quand p diminue, le nombre de questions augmente de façon logarithmique."
+            },
+            q5: {
+                correct: "✅ Parfait ! En moyenne : (1/2 × 1) + (1/4 × 2) + (1/4 × 2) = 0,5 + 0,5 + 0,5 = 1,5 questions.",
+                incorrect: "❌ Pensez à calculer la moyenne pondérée : probabilité × nombre de questions pour chaque cas."
+            },
+            q6: {
+                correct: "✅ Exact ! Une entropie élevée signifie beaucoup d'incertitude, beaucoup de questions nécessaires. C'est le cas quand tous les événements sont équiprobables.",
+                incorrect: "❌ Réfléchissez : si tous les gobelets ont la même probabilité, l'incertitude est maximale."
+            }
+        };
+
+        function selectOption(element, questionId, isCorrect) {
+            if (answers[questionId].answered) return;
+
+            // Remove previous selections
+            const options = element.parentElement.querySelectorAll('.option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Mark as selected
+            element.classList.add('selected');
+            
+            // Show feedback after a brief delay
+            setTimeout(() => {
+                answers[questionId].answered = true;
+                answers[questionId].correct = isCorrect;
+                
+                if (isCorrect) {
+                    element.classList.add('correct');
+                    correctAnswers++;
+                } else {
+                    element.classList.add('incorrect');
+                }
+                
+                showFeedback(questionId, isCorrect);
+                
+                // Enable next button
+                const sectionNum = questionId.replace('q', '');
+                const mapping = { '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7 };
+                const btnId = `btn-section${mapping[sectionNum]}`;
+                document.getElementById(btnId).disabled = false;
+                
+                // Special reveals
+                if (questionId === 'q4' && isCorrect) {
+                    document.getElementById('formulaReveal').style.display = 'block';
+                }
+                if (questionId === 'q6' && isCorrect) {
+                    document.getElementById('connexionIA').style.display = 'block';
+                }
+            }, 300);
+        }
+
+        function showFeedback(questionId, isCorrect) {
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            feedback.textContent = isCorrect ? 
+                feedbackMessages[questionId].correct : 
+                feedbackMessages[questionId].incorrect;
+            feedback.className = `feedback ${isCorrect ? 'success' : 'error'} show`;
+        }
+
+        function nextSection(sectionNum) {
+            // Mark current section as completed
+            const current = document.getElementById(`section${currentSection}`);
+            current.classList.remove('active');
+            current.classList.add('completed');
+            
+            // Activate next section
+            currentSection = sectionNum;
+            const next = document.getElementById(`section${sectionNum}`);
+            next.classList.add('active');
+            
+            // Update progress bar
+            updateProgress();
+            
+            // Scroll to new section
+            next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (sectionNum === 5) {
+            setTimeout(drawEntropyGraph, 100);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function completeActivity() {
+            document.getElementById('section7').classList.remove('active');
+            document.getElementById('section7').classList.add('completed');
+            document.getElementById('completion').style.display = 'block';
+            document.getElementById('completion').classList.add('active');
+            updateProgress();
+            document.getElementById('completion').scrollIntoView({ behavior: 'smooth' });
+            
+            // Send xAPI completion statement if available
+            if (typeof sendStatement !== 'undefined') {
+                sendCompletionStatement();
+            }
+        }
+
+        function sendCompletionStatement() {
+            // xAPI completion tracking
+            const statement = {
+                actor: {
+                    mbox: "mailto:learner@example.com",
+                    name: "Learner"
+                },
+                verb: {
+                    id: "http://adlnet.gov/expapi/verbs/completed",
+                    display: { "fr-FR": "complété" }
+                },
+                object: {
+                    id: "http://example.com/activities/entropie",
+                    definition: {
+                        name: { "fr-FR": "Découvrir l'Entropie" },
+                        description: { "fr-FR": "Activité interactive sur la théorie de l'information de Shannon" }
+                    }
+                },
+                result: {
+                    score: {
+                        scaled: correctAnswers / 6,
+                        raw: correctAnswers,
+                        min: 0,
+                        max: 6
+                    },
+                    success: correctAnswers >= 4,
+                    completion: true
+                }
+            };
+            
+            console.log("xAPI Statement:", statement);
+            // In production, this would send to an LRS
+        }
+
+        function showHint() {
+    const hintBox = document.getElementById('hint-box');
+    const tree = document.getElementById('decision-tree');
+    
+    hintBox.style.display = 'block';
+    tree.style.display = 'block';
+    
+    // Animation d'apparition
+    setTimeout(() => {
+        hintBox.style.opacity = '0';
+        hintBox.style.transform = 'translateY(20px)';
+        hintBox.style.transition = 'all 0.6s ease-out';
+        
+        tree.style.opacity = '0';
+        tree.style.transform = 'translateY(20px)';
+        tree.style.transition = 'all 0.6s ease-out';
+        
+        setTimeout(() => {
+            hintBox.style.opacity = '1';
+            hintBox.style.transform = 'translateY(0)';
+            tree.style.opacity = '1';
+            tree.style.transform = 'translateY(0)';
+        }, 10);
+    }, 10);
+    
+    // Masquer le bouton après utilisation
+    event.target.style.display = 'none';
+    }
+
+    function drawEntropyGraph() {
+    const canvas = document.getElementById('entropyGraph');
+    if (!canvas) return;
+    // ... tout le code du graphique ...
+    }
+
+    // Dessiner le graphique au chargement
+    if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', drawEntropyGraph);
+    } 
+    else {
+    drawEntropyGraph();
+    }
+
+    function drawEntropyGraph() {
+    const canvas = document.getElementById('entropyGraph');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+    
+    // Marges
+    const margin = { top: 40, right: 40, bottom: 50, left: 60 };
+    const graphWidth = width - margin.left - margin.right;
+    const graphHeight = height - margin.top - margin.bottom;
+    
+    // Échelles
+    const xMin = 0.01, xMax = 1;
+    const yMin = 0, yMax = 10;
+    
+    // Fonction de conversion
+    const xToCanvas = (x) => margin.left + ((x - xMin) / (xMax - xMin)) * graphWidth;
+    const yToCanvas = (y) => height - margin.bottom - ((y - yMin) / (yMax - yMin)) * graphHeight;
+    
+    // Fond blanc
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, width, height);
+    
+    // Axes
+    ctx.strokeStyle = '#333';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(margin.left, height - margin.bottom);
+    ctx.lineTo(width - margin.right, height - margin.bottom);
+    ctx.stroke();
+    
+    // Flèches
+    ctx.beginPath();
+    ctx.moveTo(width - margin.right, height - margin.bottom);
+    ctx.lineTo(width - margin.right - 8, height - margin.bottom - 4);
+    ctx.lineTo(width - margin.right - 8, height - margin.bottom + 4);
+    ctx.closePath();
+    ctx.fillStyle = '#333';
+    ctx.fill();
+    
+    ctx.beginPath();
+    ctx.moveTo(margin.left, margin.top);
+    ctx.lineTo(margin.left - 4, margin.top + 8);
+    ctx.lineTo(margin.left + 4, margin.top + 8);
+    ctx.closePath();
+    ctx.fill();
+    
+    // Graduations axe X
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    for (let x = 0.1; x <= 1; x += 0.1) {
+        const canvasX = xToCanvas(x);
+        ctx.fillText(x.toFixed(1), canvasX, height - margin.bottom + 20);
+        ctx.beginPath();
+        ctx.moveTo(canvasX, height - margin.bottom);
+        ctx.lineTo(canvasX, height - margin.bottom + 5);
+        ctx.stroke();
+    }
+    
+    // Graduations axe Y
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (let y = 0; y <= 10; y += 1) {
+        const canvasY = yToCanvas(y);
+        ctx.fillText(y, margin.left - 10, canvasY);
+        ctx.beginPath();
+        ctx.moveTo(margin.left - 5, canvasY);
+        ctx.lineTo(margin.left, canvasY);
+        ctx.stroke();
+    }
+    
+    // Grille légère
+    ctx.strokeStyle = '#e0e0e0';
+    ctx.lineWidth = 0.5;
+    for (let y = 0; y <= 10; y += 1) {
+        ctx.beginPath();
+        ctx.moveTo(margin.left, yToCanvas(y));
+        ctx.lineTo(width - margin.right, yToCanvas(y));
+        ctx.stroke();
+    }
+    
+    // Courbe -log2(x) = log2(1/x)
+    ctx.strokeStyle = '#4169E1';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    
+    let firstPoint = true;
+    for (let x = xMin; x <= xMax; x += 0.001) {
+        const y = -Math.log2(x);
+        if (y >= yMin && y <= yMax) {
+            const canvasX = xToCanvas(x);
+            const canvasY = yToCanvas(y);
+            
+            if (firstPoint) {
+                ctx.moveTo(canvasX, canvasY);
+                firstPoint = false;
+            } else {
+                ctx.lineTo(canvasX, canvasY);
+            }
+        }
+    }
+    ctx.stroke();
+    
+    // Formule
+    ctx.fillStyle = '#333';
+    ctx.font = 'italic 18px serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('f(x) = log₂(1/x)', width / 2 + 80, margin.top + 20);
+    }
+    
+
+// Dessiner le graphique au chargement
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', drawEntropyGraph);
+} else {
+    drawEntropyGraph();
+}
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
