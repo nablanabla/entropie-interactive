@@ -33,7 +33,9 @@ Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un cé
 </p>
 
 
-La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au sens de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le bit (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler entropie.
+La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au sens de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
+
+L'activité consiste à découvrir le point suivant :
 
 **L'entropie correspond au nombre minimum théorique de bits qu'il faut pour coder un message.**
 
