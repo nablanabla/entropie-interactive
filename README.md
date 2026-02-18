@@ -41,6 +41,20 @@ L'activité consiste à découvrir le point suivant :
 
 ---
 
+## 📚 Valeur de l'information et incertitude
+
+L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible. De plus, Shannon fait un astucieux parallèle entre *information* d'un côté et *incertitude* de l'autre: l'incertitude est d'autant plus forte qu'il faut beaucoup d'information pour la combler. 
+
+Ces deux remarques sont au coeur de l'apprentissage machine.
+
+### Exemple 1
+Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec).
+
+### Exemple 2
+Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il devra beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), le médecin est dans une très forte ***certitude***, il sait immédiatement ce qu'il faut faire (injecter un sérum antivenimeux).
+
+---
+
 ## 📖 Contenu de l'activité
 
 L'activité se compose de **7 sections progressives** :
