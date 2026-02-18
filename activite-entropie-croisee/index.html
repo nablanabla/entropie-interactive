@@ -504,7 +504,7 @@
                 </div>
 
                 <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
-                    <div class="diagnostic-label" style="color: #6a89cc;">Étudiant 1 (Q₁)</div>
+                    <div class="diagnostic-label" style="color: #6a89cc;">Étudiant 1 (R₁)</div>
                     <div>0.50</div>
                     <div>0.20</div>
                     <div>0.15</div>
@@ -512,9 +512,9 @@
                 </div>
 
                 <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
-                    <div class="diagnostic-label" style="color: var(--accent);">Étudiant 2 (Q₂)</div>
-                    <div>0.15</div>
-                    <div>0.35</div>
+                    <div class="diagnostic-label" style="color: var(--accent);">Étudiant 2 (R₂)</div>
+                    <div>0.25</div>
+                    <div>0.25</div>
                     <div>0.25</div>
                     <div>0.25</div>
                 </div>
@@ -533,7 +533,7 @@
                 </div>
 
                 <div style="margin-bottom: 1.5rem;">
-                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: #6a89cc;">Étudiant 1 (Q₁)</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: #6a89cc;">Étudiant 1 (R₁)</div>
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
                         <div class="prob-bar-container"><div class="prob-bar student1" style="width: 62.5%;">50%</div></div>
                         <div class="prob-bar-container"><div class="prob-bar student1" style="width: 25%;">20%</div></div>
@@ -543,10 +543,10 @@
                 </div>
 
                 <div>
-                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--accent);">Étudiant 2 (Q₂)</div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--accent);">Étudiant 2 (R₂)</div>
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
-                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 18.75%;">15%</div></div>
-                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 43.75%;">35%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
                         <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
                         <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
                     </div>
@@ -561,7 +561,7 @@
             <h2>📊 Comparaison des erreurs</h2>
 
             <h3>Écart en valeur absolue (distance L1)</h3>
-            <p>Somme des différences absolues : |P<sub>i</sub> - Q<sub>i</sub>|</p>
+            <p>Somme des différences absolues : |P<sub>i</sub> - R<sub>i</sub>|</p>
 
             <div class="comparison-grid">
                 <div class="student-card student1">
@@ -576,19 +576,19 @@
                 <div class="student-card student2">
                     <h3 style="color: var(--accent); margin-top: 0;">Étudiant 2</h3>
                     <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; margin: 1rem 0;">
-                        |0.80-0.15| + |0.10-0.35| + |0.05-0.25| + |0.05-0.25|<br>
-                        = 0.65 + 0.25 + 0.20 + 0.20
+                        |0.80-0.25| + |0.10-0.25| + |0.05-0.25| + |0.05-0.25|<br>
+                        = 0.55 + 0.15 + 0.20 + 0.20
                     </div>
-                    <div class="metric-value">= 1.30</div>
+                    <div class="metric-value">= 1.10</div>
                 </div>
             </div>
 
             <div class="info-box">
-                <p><strong>Premier constat :</strong> L'étudiant 2 a un écart <strong>2.17× plus grand</strong> (1.30 vs 0.60)</p>
+                <p><strong>Premier constat :</strong> L'étudiant 2 a un écart <strong>1.83× plus grand</strong> (1.10 vs 0.60)</p>
             </div>
 
             <h3>Divergence de Kullback-Leibler</h3>
-            <p>D<sub>KL</sub>(P||Q) = Σ P<sub>i</sub> × log₂(P<sub>i</sub> / Q<sub>i</sub>)</p>
+            <p>D<sub>KL</sub>(P||R) = Σ P<sub>i</sub> × log₂(P<sub>i</sub> / R<sub>i</sub>)</p>
 
             <div class="comparison-grid">
                 <div class="student-card student1">
@@ -605,31 +605,31 @@
                         + 0.05 × (-1.585)
                         </span>
                     </div>
-                    <div class="metric-value">= 0.284 bits</div>
+                    <div class="metric-value">= 0.197 bits</div>
                 </div>
 
                 <div class="student-card student2">
                     <h3 style="color: var(--accent); margin-top: 0;">Étudiant 2</h3>
                     <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin: 1rem 0; line-height: 1.8;">
-                        = 0.80 × log₂(0.80/0.15)<br>
-                        + 0.10 × log₂(0.10/0.35)<br>
+                        = 0.80 × log₂(0.80/0.25)<br>
+                        + 0.10 × log₂(0.10/0.25)<br>
                         + 0.05 × log₂(0.05/0.25)<br>
                         + 0.05 × log₂(0.05/0.25)<br>
                         <span style="color: var(--text-dim);">
-                        = 0.80 × 2.415<br>
-                        + 0.10 × (-1.807)<br>
+                        = 0.80 × 1.678<br>
+                        + 0.10 × (-1.322)<br>
                         + 0.05 × (-2.322)<br>
                         + 0.05 × (-2.322)
                         </span>
                     </div>
-                    <div class="metric-value">= 1.519 bits</div>
+                    <div class="metric-value">= 0.678 bits</div>
                 </div>
             </div>
 
             <div class="info-box" style="background: rgba(233, 69, 96, 0.15); border-left: 4px solid var(--accent);">
                 <p><strong>🎯 Constat crucial :</strong></p>
-                <p style="margin-top: 0.5rem;">L'étudiant 2 a une divergence KL <strong>5.35× plus grande</strong> (1.519 vs 0.284)</p>
-                <p style="margin-top: 1rem;">Alors que son écart en valeur absolue n'était que 2.17× plus grand !</p>
+                <p style="margin-top: 0.5rem;">L'étudiant 2 a une divergence KL <strong>3.45× plus grande</strong> (0.678 vs 0.197)</p>
+                <p style="margin-top: 1rem;">Alors que son écart en valeur absolue n'était que 1.83× plus grand !</p>
             </div>
 
             <button class="button" onclick="nextSection(4)">Comprendre pourquoi →</button>
@@ -658,9 +658,9 @@
                         </div>
                         <div style="background: rgba(233, 69, 96, 0.2); padding: 1rem; border-radius: 8px;">
                             <div style="color: var(--accent); font-weight: 600;">Étudiant 2</div>
-                            <div style="margin-top: 0.5rem;">Estime : 0.15 ⚠️</div>
+                            <div style="margin-top: 0.5rem;">Estime : 0.25 ⚠️</div>
                             <div style="margin-top: 0.5rem; color: var(--accent); font-weight: 600;">
-                                Contribution : 0.80 × log₂(5.33) = 1.932 bits
+                                Contribution : 0.80 × log₂(3.2) = 1.342 bits
                             </div>
                         </div>
                     </div>
@@ -669,18 +669,20 @@
 
             <div class="info-box">
                 <p><strong>💡 Principe clé :</strong></p>
-                <p style="margin-top: 0.5rem;">Sous-estimer fortement un événement <strong>très probable</strong> coûte extrêmement cher en termes d'information.</p>
-                <p style="margin-top: 1rem;">C'est comme dire "je suis sûr à 85% que ça n'arrivera pas" alors que ça arrive 80% du temps !</p>
+                <p style="margin-top: 0.5rem;">Sous-estimer un événement <strong>très probable</strong> coûte extrêmement cher en termes d'information.</p>
+                <p style="margin-top: 1rem;">L'étudiant 2 propose une distribution <strong>uniforme</strong> (25% partout), ignorant complètement la forte probabilité de D₁ !</p>
             </div>
 
-            <h3>La fonction log explique tout</h3>
+            <h3>Comparaison visuelle : L1 vs KL</h3>
             <div style="background: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
-                <canvas id="logGraph" width="600" height="400" style="max-width: 100%;"></canvas>
+                <canvas id="logGraph" width="700" height="450" style="max-width: 100%;"></canvas>
             </div>
 
             <div class="info-box">
                 <p><strong>Interprétation du graphique :</strong></p>
-                <p style="margin-top: 0.5rem;">Plus le ratio P<sub>i</sub>/Q<sub>i</sub> est grand (on sous-estime), plus la pénalité logarithmique explose.</p>
+                <p style="margin-top: 0.5rem;"><strong>Distance L1</strong> (barre bleue) : mesure l'écart absolu total, traite toutes les erreurs également.</p>
+                <p style="margin-top: 0.5rem;"><strong>Divergence KL</strong> (courbe rouge) : pénalise exponentiellement quand on sous-estime un événement probable.</p>
+                <p style="margin-top: 1rem;">Plus le ratio P<sub>i</sub>/R<sub>i</sub> est grand (on sous-estime), plus la pénalité logarithmique explose.</p>
                 <p style="margin-top: 1rem;">C'est pourquoi l'entropie croisée est une excellente fonction de perte pour l'apprentissage automatique : elle pénalise sévèrement les prédictions confiantes mais fausses.</p>
             </div>
 
@@ -853,7 +855,7 @@
             const width = canvas.width;
             const height = canvas.height;
             
-            const margin = { top: 40, right: 40, bottom: 60, left: 70 };
+            const margin = { top: 50, right: 40, bottom: 70, left: 80 };
             const graphWidth = width - margin.left - margin.right;
             const graphHeight = height - margin.top - margin.bottom;
             
@@ -870,11 +872,12 @@
             ctx.lineTo(width - margin.right, height - margin.bottom);
             ctx.stroke();
             
-            // Function: Pi * log2(Pi/Qi)
+            // Function: Pi * log2(Pi/Ri) for KL divergence
+            // And |Pi - Ri| for L1 distance
             // Let's plot for Pi = 0.8 (expert's probability for D1)
             const Pi = 0.8;
             const xMin = 0.01, xMax = 1.0;
-            const yMax = 4;
+            const yMax = 2.5; // Increased to fit both metrics
             
             const xToCanvas = (x) => margin.left + ((x - xMin) / (xMax - xMin)) * graphWidth;
             const yToCanvas = (y) => height - margin.bottom - (y / yMax) * graphHeight;
@@ -882,7 +885,7 @@
             // Grid
             ctx.strokeStyle = '#e0e0e0';
             ctx.lineWidth = 0.5;
-            for (let y = 0; y <= 4; y++) {
+            for (let y = 0; y <= 2.5; y += 0.5) {
                 ctx.beginPath();
                 ctx.moveTo(margin.left, yToCanvas(y));
                 ctx.lineTo(width - margin.right, yToCanvas(y));
@@ -894,7 +897,7 @@
             ctx.font = '14px Arial';
             ctx.textAlign = 'right';
             ctx.textBaseline = 'middle';
-            for (let y = 0; y <= 4; y++) {
+            for (let y = 0; y <= 2.5; y += 0.5) {
                 ctx.fillText(y.toFixed(1), margin.left - 10, yToCanvas(y));
             }
             
@@ -913,27 +916,28 @@
             }
             
             // Labels
+            ctx.fillStyle = '#333';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('Qi (probabilité estimée)', width / 2, height - 15);
+            ctx.fillText('Ri (probabilité estimée)', width / 2, height - 20);
             
             ctx.save();
-            ctx.translate(20, height / 2);
+            ctx.translate(25, height / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'center';
-            ctx.fillText('Pénalité (bits)', 0, 0);
+            ctx.fillText('Mesure de l\'erreur', 0, 0);
             ctx.restore();
             
-            // Plot curve
-            ctx.strokeStyle = '#e94560';
+            // Plot L1 distance curve: |Pi - Ri|
+            ctx.strokeStyle = '#4169E1';
             ctx.lineWidth = 3;
             ctx.beginPath();
             
             let firstPoint = true;
-            for (let Qi = xMin; Qi <= xMax; Qi += 0.001) {
-                const penalty = Pi * Math.log2(Pi / Qi);
-                if (penalty >= 0 && penalty <= yMax) {
-                    const x = xToCanvas(Qi);
-                    const y = yToCanvas(penalty);
+            for (let Ri = xMin; Ri <= xMax; Ri += 0.001) {
+                const l1 = Math.abs(Pi - Ri);
+                if (l1 >= 0 && l1 <= yMax) {
+                    const x = xToCanvas(Ri);
+                    const y = yToCanvas(l1);
                     
                     if (firstPoint) {
                         ctx.moveTo(x, y);
@@ -945,36 +949,114 @@
             }
             ctx.stroke();
             
-            // Mark student points
-            // Student 1: Q1 = 0.5, penalty = 0.8 * log2(0.8/0.5) = 0.542
-            const Q1 = 0.5;
-            const penalty1 = Pi * Math.log2(Pi / Q1);
-            ctx.fillStyle = '#6a89cc';
+            // Plot KL divergence curve: Pi * log2(Pi/Ri)
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = 3;
             ctx.beginPath();
-            ctx.arc(xToCanvas(Q1), yToCanvas(penalty1), 8, 0, 2 * Math.PI);
-            ctx.fill();
-            ctx.fillStyle = '#6a89cc';
-            ctx.font = '12px Arial';
-            ctx.textAlign = 'left';
-            ctx.fillText('Étudiant 1', xToCanvas(Q1) + 12, yToCanvas(penalty1));
             
-            // Student 2: Q2 = 0.15, penalty = 0.8 * log2(0.8/0.15) = 1.932
-            const Q2 = 0.15;
-            const penalty2 = Pi * Math.log2(Pi / Q2);
+            firstPoint = true;
+            for (let Ri = xMin; Ri <= xMax; Ri += 0.001) {
+                const kl = Pi * Math.log2(Pi / Ri);
+                if (kl >= 0 && kl <= yMax) {
+                    const x = xToCanvas(Ri);
+                    const y = yToCanvas(kl);
+                    
+                    if (firstPoint) {
+                        ctx.moveTo(x, y);
+                        firstPoint = false;
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+            }
+            ctx.stroke();
+            
+            // Mark student points for L1
+            // Student 1: R1 = 0.5, L1 = |0.8 - 0.5| = 0.3
+            const R1 = 0.5;
+            const l1_1 = Math.abs(Pi - R1);
+            ctx.fillStyle = '#4169E1';
+            ctx.beginPath();
+            ctx.arc(xToCanvas(R1), yToCanvas(l1_1), 7, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Student 2: R2 = 0.25, L1 = |0.8 - 0.25| = 0.55
+            const R2 = 0.25;
+            const l1_2 = Math.abs(Pi - R2);
+            ctx.fillStyle = '#4169E1';
+            ctx.beginPath();
+            ctx.arc(xToCanvas(R2), yToCanvas(l1_2), 7, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Mark student points for KL
+            // Student 1: R1 = 0.5, KL = 0.8 * log2(0.8/0.5) = 0.542
+            const kl_1 = Pi * Math.log2(Pi / R1);
             ctx.fillStyle = '#e94560';
             ctx.beginPath();
-            ctx.arc(xToCanvas(Q2), yToCanvas(penalty2), 8, 0, 2 * Math.PI);
+            ctx.arc(xToCanvas(R1), yToCanvas(kl_1), 7, 0, 2 * Math.PI);
             ctx.fill();
+            
+            // Student 2: R2 = 0.25, KL = 0.8 * log2(0.8/0.25) = 1.342
+            const kl_2 = Pi * Math.log2(Pi / R2);
             ctx.fillStyle = '#e94560';
-            ctx.font = '12px Arial';
+            ctx.beginPath();
+            ctx.arc(xToCanvas(R2), yToCanvas(kl_2), 7, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Add labels for students
+            ctx.fillStyle = '#333';
+            ctx.font = '13px Arial';
+            ctx.textAlign = 'center';
+            
+            // Student 1 label
+            ctx.fillText('Étud. 1', xToCanvas(R1), yToCanvas(Math.max(l1_1, kl_1)) - 25);
+            ctx.fillStyle = '#4169E1';
+            ctx.font = '11px Arial';
+            ctx.fillText('L1: 0.30', xToCanvas(R1), yToCanvas(l1_1) + 15);
+            ctx.fillStyle = '#e94560';
+            ctx.fillText('KL: 0.54', xToCanvas(R1), yToCanvas(kl_1) - 15);
+            
+            // Student 2 label
+            ctx.fillStyle = '#333';
+            ctx.font = '13px Arial';
+            ctx.fillText('Étud. 2', xToCanvas(R2), yToCanvas(kl_2) - 40);
+            ctx.fillStyle = '#4169E1';
+            ctx.font = '11px Arial';
+            ctx.fillText('L1: 0.55', xToCanvas(R2) + 30, yToCanvas(l1_2));
+            ctx.fillStyle = '#e94560';
+            ctx.fillText('KL: 1.34', xToCanvas(R2) - 35, yToCanvas(kl_2) + 5);
+            
+            // Legend
+            const legendX = width - margin.right - 150;
+            const legendY = margin.top + 20;
+            
+            // L1 legend
+            ctx.strokeStyle = '#4169E1';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(legendX, legendY);
+            ctx.lineTo(legendX + 40, legendY);
+            ctx.stroke();
+            ctx.fillStyle = '#333';
+            ctx.font = '13px Arial';
             ctx.textAlign = 'left';
-            ctx.fillText('Étudiant 2', xToCanvas(Q2) + 12, yToCanvas(penalty2) - 15);
+            ctx.fillText('Distance L1: |0.8 - Ri|', legendX + 50, legendY + 5);
+            
+            // KL legend
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(legendX, legendY + 25);
+            ctx.lineTo(legendX + 40, legendY + 25);
+            ctx.stroke();
+            ctx.fillStyle = '#333';
+            ctx.fillText('Divergence KL: 0.8 × log₂(0.8/Ri)', legendX + 50, legendY + 30);
             
             // Title
             ctx.fillStyle = '#333';
             ctx.font = 'bold 18px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('Pénalité = 0.8 × log₂(0.8 / Qi)', width / 2, 20);
+            ctx.fillText('Comparaison L1 vs KL pour D₁ (P = 80%)', width / 2, 25);
         }
 
         function drawTrainingGraph() {
