@@ -1,4 +1,4 @@
-# Découvrir l'Entropie - Activité Interactive
+# Découvrir l'Entropie 
 
 [![Deployed](https://img.shields.io/badge/statut-en%20ligne-brightgreen)](https://VOTRE-USERNAME.github.io/entropie-interactive/)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
@@ -9,7 +9,7 @@
 
 ## 🎯 Objectif
 
-Cette activité permet aux étudiants en sciences de la santé de découvrir la théorie de l'information de Claude Shannon et son application dans le domaine de l'intelligence artificielle.
+Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de discuter son application dans le domaine de l'intelligence artificielle.
 
 
 ---
