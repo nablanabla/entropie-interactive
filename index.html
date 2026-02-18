@@ -487,8 +487,9 @@
             <div class="scenario">
                 <p><strong>Le jeu :</strong> Une balle est cachée sous l'un de plusieurs gobelets. Vous devez la trouver en posant des questions à un informateur qui connaît l'emplacement de la balle mais qui ne sait répondre que par <strong>OUI</strong> ou par <strong>NON</strong>.</p>
                 <p style="margin-top: 1rem;"> Votre objectif est de <strong> minimiser le nombre de questions nécessaires. </strong> </p>
+                <p style="margin-top: 1rem;"> L'idée est la suivante : plus le nombre de questions nécessaires est grand, <strong>  plus l'information a de la valeur. </strong> </p>
                 <p style="margin-top: 1rem;"> <strong> Analogie scientifique :</strong> trouver la bonne hypothèse en minimisant le nombre d'expérience. </p>  
-                <p style="margin-top: 1rem;"> <strong> Analogie médicale : </strong> trouver la pathologie en minimisant le nombre de test.   </p>
+                <p style="margin-top: 1rem;"> <strong> Analogie médicale : </strong> trouver le bon diagnostic en minimisant le nombre de test.   </p>
             </div>
             <button class="button" onclick="nextSection(2)">Commencer l'exploration →</button>
         </div>
@@ -691,8 +692,6 @@
 
             <div class="question-box">
                 <p class="question-text">Quelle formule relie le nombre de questions à la probabilité p ?</p>
-                 <p style="margin-top: 1rem;"> <strong> Explication du symbole log₂(x) :</strong> c'est une formule qui permet d'extraire la puissance lorsqu'un nombre x est écrit en base 2. </p>
-                 <p style="margin-top: 1rem;"> <strong> Exemple:</strong> log₂(2<sup>1</sup>)=1, log₂(2<sup>2</sup>)=2 , log₂(2<sup>3</sup>)=3,...log₂(2<sup>n</sup>)=n<div class="etc"></div> 
                 <div class="options">
                     <div class="option" onclick="selectOption(this, 'q4', false)">
                         <span class="option-letter">A</span>
@@ -711,6 +710,8 @@
                         <span>Nombre de questions = log₂(p)</span>
                     </div>
                 </div>
+                <p style="margin-top: 1rem;"> <strong> Hint : La fonction mathématique log₂(x) </strong> est la fonction qui permet d'extraire la puissance lorsqu'un nombre x est écrit en base 2. </p>
+                 <p style="margin-top: 1rem;"> <strong> Exemple:</strong> log₂(2<sup>1</sup>)=1, log₂(2<sup>2</sup>)=2 , log₂(2<sup>3</sup>)=3,...log₂(2<sup>n</sup>)=n<div class="etc"></div> 
                 <div class="feedback" id="feedback-q4"></div>
             </div>
 
