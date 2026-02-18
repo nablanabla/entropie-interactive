@@ -1,4 +1,4 @@
-# Découvrir l'Entropie 
+# Les concepts fondamentaux de l'apprentissage machine : entropie et entropie croisée 
 
 [![Deployed](https://img.shields.io/badge/statut-en%20ligne-brightgreen)](https://VOTRE-USERNAME.github.io/entropie-interactive/)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
