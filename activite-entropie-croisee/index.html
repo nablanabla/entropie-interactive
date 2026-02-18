@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Entropie Croisée - Activité Interactive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --success: #06d6a0;
+            --warning: #ffd166;
+            --text: #f1f1f1;
+            --text-dim: #a8a8b3;
+            --card-bg: #0f3460;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), var(--warning));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--warning));
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section.completed {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .scenario {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .formula-box {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 2px solid var(--warning);
+            text-align: center;
+        }
+
+        .formula {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--warning);
+            margin: 1rem 0;
+            font-weight: 700;
+        }
+
+        .info-box {
+            background: rgba(255, 209, 102, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        .info-box strong {
+            color: var(--warning);
+        }
+
+        .diagnostic-container {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .diagnostic-row {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: grid;
+            grid-template-columns: 150px 1fr 1fr 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .diagnostic-label {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .prob-bar-container {
+            position: relative;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .prob-bar {
+            height: 100%;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            transition: width 0.6s ease-out;
+        }
+
+        .prob-bar.expert {
+            background: linear-gradient(90deg, var(--success), #04a777);
+        }
+
+        .prob-bar.student1 {
+            background: linear-gradient(90deg, #6a89cc, #4a69bd);
+        }
+
+        .prob-bar.student2 {
+            background: linear-gradient(90deg, #e94560, #c44569);
+        }
+
+        .metric-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--accent);
+        }
+
+        .metric-value {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.8rem;
+            color: var(--warning);
+            font-weight: 700;
+        }
+
+        .button {
+            background: linear-gradient(135deg, var(--accent), #c44569);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Crimson Pro', serif;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            margin-top: 1.5rem;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.5);
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: rgba(233, 69, 96, 0.2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .student-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .student-card.student1 {
+            border-color: #6a89cc;
+        }
+
+        .student-card.student2 {
+            border-color: var(--accent);
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(6, 214, 160, 0.2), rgba(255, 209, 102, 0.2));
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: celebrate 1s ease-out;
+        }
+
+        @keyframes celebrate {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.2) rotate(-10deg); }
+            75% { transform: scale(1.2) rotate(10deg); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .training-step {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--success);
+        }
+
+        .loss-graph {
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .diagnostic-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>L'Entropie Croisée</h1>
+            <p class="subtitle">Mesurer la distance entre distributions</p>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Section 1: Introduction -->
+        <div class="section active" id="section1">
+            <h2>🎯 Le problème</h2>
+            <div class="scenario">
+                <p><strong>Question centrale :</strong> Comment mesurer l'écart entre deux distributions de probabilité ?</p>
+                <p style="margin-top: 1rem;">Par exemple :</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>La distribution prédite par un modèle vs la vraie distribution</li>
+                    <li>L'estimation d'un étudiant vs l'avis d'un expert</li>
+                    <li>Les probabilités calculées par une IA vs les données observées</li>
+                </ul>
+            </div>
+
+            <h3>L'entropie croisée : définition</h3>
+            <div class="formula-box">
+                <p><strong>Entropie croisée entre P (vraie) et Q (prédite) :</strong></p>
+                <div class="formula" style="font-size: 2rem;">
+                    <math display="block">
+                        <mi>H</mi>
+                        <mrow><mo>(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo>)</mo></mrow>
+                        <mo>=</mo>
+                        <mo>-</mo>
+                        <munder><mo>∑</mo><mi>i</mi></munder>
+                        <msub><mi>P</mi><mi>i</mi></msub>
+                        <mo>×</mo>
+                        <msub><mo>log</mo><mn>2</mn></msub>
+                        <mrow><mo>(</mo><msub><mi>Q</mi><mi>i</mi></msub><mo>)</mo></mrow>
+                    </math>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>💡 Interprétation :</strong> L'entropie croisée mesure le nombre moyen de bits nécessaires pour encoder des données provenant de la distribution P en utilisant un code optimal pour Q.</p>
+                <p style="margin-top: 1rem;">Plus Q est éloignée de P, plus il faut de bits → plus H(P,Q) est grande.</p>
+            </div>
+
+            <h3>La divergence de Kullback-Leibler</h3>
+            <div class="formula-box">
+                <p><strong>Décomposition :</strong></p>
+                <div class="formula" style="font-size: 1.5rem;">
+                    <math display="block">
+                        <mi>H</mi><mrow><mo>(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo>)</mo></mrow>
+                        <mo>=</mo>
+                        <mi>H</mi><mrow><mo>(</mo><mi>P</mi><mo>)</mo></mrow>
+                        <mo>+</mo>
+                        <msub><mi>D</mi><mi>KL</mi></msub>
+                        <mrow><mo>(</mo><mi>P</mi><mo>||</mo><mi>Q</mi><mo>)</mo></mrow>
+                    </math>
+                </div>
+                <p style="margin-top: 1.5rem;">où</p>
+                <div class="formula" style="font-size: 1.5rem; margin-top: 1rem;">
+                    <math display="block">
+                        <msub><mi>D</mi><mi>KL</mi></msub>
+                        <mrow><mo>(</mo><mi>P</mi><mo>||</mo><mi>Q</mi><mo>)</mo></mrow>
+                        <mo>=</mo>
+                        <munder><mo>∑</mo><mi>i</mi></munder>
+                        <msub><mi>P</mi><mi>i</mi></msub>
+                        <mo>×</mo>
+                        <msub><mo>log</mo><mn>2</mn></msub>
+                        <mfrac>
+                            <msub><mi>P</mi><mi>i</mi></msub>
+                            <msub><mi>Q</mi><mi>i</mi></msub>
+                        </mfrac>
+                    </math>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>🔑 Propriété fondamentale :</strong> D<sub>KL</sub>(P||Q) ≥ 0</p>
+                <p style="margin-top: 0.5rem;">Et D<sub>KL</sub>(P||Q) = 0 si et seulement si P = Q</p>
+                <p style="margin-top: 1rem;">La divergence KL mesure l'<strong>excès d'information</strong> nécessaire quand on utilise Q au lieu de P.</p>
+            </div>
+
+            <button class="button" onclick="nextSection(2)">Voir un exemple concret →</button>
+        </div>
+
+        <!-- Section 2: Cas médical -->
+        <div class="section" id="section2">
+            <h2>🩺 Cas pratique : Diagnostic médical</h2>
+            
+            <div class="scenario">
+                <p><strong>Contexte :</strong> Un patient présente des symptômes. Un expert analyse le cas et donne sa distribution de probabilité pour 4 diagnostics possibles.</p>
+                <p style="margin-top: 1rem;">Deux étudiants en médecine (Étudiant 1 et Étudiant 2) donnent également leur estimation.</p>
+            </div>
+
+            <h3>Les distributions de probabilité</h3>
+            
+            <div class="diagnostic-container">
+                <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px; font-weight: 600; background: rgba(255, 209, 102, 0.1);">
+                    <div></div>
+                    <div>D₁</div>
+                    <div>D₂</div>
+                    <div>D₃</div>
+                    <div>D₄</div>
+                </div>
+
+                <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
+                    <div class="diagnostic-label" style="color: var(--success);">Expert (P)</div>
+                    <div>0.80</div>
+                    <div>0.10</div>
+                    <div>0.05</div>
+                    <div>0.05</div>
+                </div>
+
+                <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
+                    <div class="diagnostic-label" style="color: #6a89cc;">Étudiant 1 (Q₁)</div>
+                    <div>0.50</div>
+                    <div>0.20</div>
+                    <div>0.15</div>
+                    <div>0.15</div>
+                </div>
+
+                <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
+                    <div class="diagnostic-label" style="color: var(--accent);">Étudiant 2 (Q₂)</div>
+                    <div>0.15</div>
+                    <div>0.35</div>
+                    <div>0.25</div>
+                    <div>0.25</div>
+                </div>
+            </div>
+
+            <h3>Visualisation des distributions</h3>
+            <div style="background: rgba(0, 0, 0, 0.2); padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0;">
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--success);">Expert (P)</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+                        <div class="prob-bar-container"><div class="prob-bar expert" style="width: 100%;">80%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar expert" style="width: 12.5%;">10%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar expert" style="width: 6.25%;">5%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar expert" style="width: 6.25%;">5%</div></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: #6a89cc;">Étudiant 1 (Q₁)</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+                        <div class="prob-bar-container"><div class="prob-bar student1" style="width: 62.5%;">50%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student1" style="width: 25%;">20%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student1" style="width: 18.75%;">15%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student1" style="width: 18.75%;">15%</div></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="font-weight: 600; margin-bottom: 0.5rem; color: var(--accent);">Étudiant 2 (Q₂)</div>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem;">
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 18.75%;">15%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 43.75%;">35%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
+                        <div class="prob-bar-container"><div class="prob-bar student2" style="width: 31.25%;">25%</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="button" onclick="nextSection(3)">Calculer les métriques →</button>
+        </div>
+
+        <!-- Section 3: Comparaison -->
+        <div class="section" id="section3">
+            <h2>📊 Comparaison des erreurs</h2>
+
+            <h3>Écart en valeur absolue (distance L1)</h3>
+            <p>Somme des différences absolues : |P<sub>i</sub> - Q<sub>i</sub>|</p>
+
+            <div class="comparison-grid">
+                <div class="student-card student1">
+                    <h3 style="color: #6a89cc; margin-top: 0;">Étudiant 1</h3>
+                    <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; margin: 1rem 0;">
+                        |0.80-0.50| + |0.10-0.20| + |0.05-0.15| + |0.05-0.15|<br>
+                        = 0.30 + 0.10 + 0.10 + 0.10
+                    </div>
+                    <div class="metric-value">= 0.60</div>
+                </div>
+
+                <div class="student-card student2">
+                    <h3 style="color: var(--accent); margin-top: 0;">Étudiant 2</h3>
+                    <div style="font-family: 'Space Mono', monospace; font-size: 0.9rem; margin: 1rem 0;">
+                        |0.80-0.15| + |0.10-0.35| + |0.05-0.25| + |0.05-0.25|<br>
+                        = 0.65 + 0.25 + 0.20 + 0.20
+                    </div>
+                    <div class="metric-value">= 1.30</div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Premier constat :</strong> L'étudiant 2 a un écart <strong>2.17× plus grand</strong> (1.30 vs 0.60)</p>
+            </div>
+
+            <h3>Divergence de Kullback-Leibler</h3>
+            <p>D<sub>KL</sub>(P||Q) = Σ P<sub>i</sub> × log₂(P<sub>i</sub> / Q<sub>i</sub>)</p>
+
+            <div class="comparison-grid">
+                <div class="student-card student1">
+                    <h3 style="color: #6a89cc; margin-top: 0;">Étudiant 1</h3>
+                    <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin: 1rem 0; line-height: 1.8;">
+                        = 0.80 × log₂(0.80/0.50)<br>
+                        + 0.10 × log₂(0.10/0.20)<br>
+                        + 0.05 × log₂(0.05/0.15)<br>
+                        + 0.05 × log₂(0.05/0.15)<br>
+                        <span style="color: var(--text-dim);">
+                        = 0.80 × 0.678<br>
+                        + 0.10 × (-1.000)<br>
+                        + 0.05 × (-1.585)<br>
+                        + 0.05 × (-1.585)
+                        </span>
+                    </div>
+                    <div class="metric-value">= 0.284 bits</div>
+                </div>
+
+                <div class="student-card student2">
+                    <h3 style="color: var(--accent); margin-top: 0;">Étudiant 2</h3>
+                    <div style="font-family: 'Space Mono', monospace; font-size: 0.85rem; margin: 1rem 0; line-height: 1.8;">
+                        = 0.80 × log₂(0.80/0.15)<br>
+                        + 0.10 × log₂(0.10/0.35)<br>
+                        + 0.05 × log₂(0.05/0.25)<br>
+                        + 0.05 × log₂(0.05/0.25)<br>
+                        <span style="color: var(--text-dim);">
+                        = 0.80 × 2.415<br>
+                        + 0.10 × (-1.807)<br>
+                        + 0.05 × (-2.322)<br>
+                        + 0.05 × (-2.322)
+                        </span>
+                    </div>
+                    <div class="metric-value">= 1.519 bits</div>
+                </div>
+            </div>
+
+            <div class="info-box" style="background: rgba(233, 69, 96, 0.15); border-left: 4px solid var(--accent);">
+                <p><strong>🎯 Constat crucial :</strong></p>
+                <p style="margin-top: 0.5rem;">L'étudiant 2 a une divergence KL <strong>5.35× plus grande</strong> (1.519 vs 0.284)</p>
+                <p style="margin-top: 1rem;">Alors que son écart en valeur absolue n'était que 2.17× plus grand !</p>
+            </div>
+
+            <button class="button" onclick="nextSection(4)">Comprendre pourquoi →</button>
+        </div>
+
+        <!-- Section 4: Explication -->
+        <div class="section" id="section4">
+            <h2>🔍 Pourquoi cette différence ?</h2>
+
+            <div class="scenario">
+                <p><strong>La divergence KL pénalise fortement les grosses erreurs sur les événements probables.</strong></p>
+            </div>
+
+            <h3>Analyse du terme problématique</h3>
+            
+            <div class="metric-box" style="border-left-color: var(--accent);">
+                <p><strong>Pour le diagnostic D₁ (le plus probable : 80%) :</strong></p>
+                <div style="margin-top: 1rem; font-family: 'Space Mono', monospace;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+                        <div style="background: rgba(106, 137, 204, 0.2); padding: 1rem; border-radius: 8px;">
+                            <div style="color: #6a89cc; font-weight: 600;">Étudiant 1</div>
+                            <div style="margin-top: 0.5rem;">Estime : 0.50</div>
+                            <div style="margin-top: 0.5rem; color: var(--warning);">
+                                Contribution : 0.80 × log₂(1.6) = 0.542 bits
+                            </div>
+                        </div>
+                        <div style="background: rgba(233, 69, 96, 0.2); padding: 1rem; border-radius: 8px;">
+                            <div style="color: var(--accent); font-weight: 600;">Étudiant 2</div>
+                            <div style="margin-top: 0.5rem;">Estime : 0.15 ⚠️</div>
+                            <div style="margin-top: 0.5rem; color: var(--accent); font-weight: 600;">
+                                Contribution : 0.80 × log₂(5.33) = 1.932 bits
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <p><strong>💡 Principe clé :</strong></p>
+                <p style="margin-top: 0.5rem;">Sous-estimer fortement un événement <strong>très probable</strong> coûte extrêmement cher en termes d'information.</p>
+                <p style="margin-top: 1rem;">C'est comme dire "je suis sûr à 85% que ça n'arrivera pas" alors que ça arrive 80% du temps !</p>
+            </div>
+
+            <h3>La fonction log explique tout</h3>
+            <div style="background: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                <canvas id="logGraph" width="600" height="400" style="max-width: 100%;"></canvas>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Interprétation du graphique :</strong></p>
+                <p style="margin-top: 0.5rem;">Plus le ratio P<sub>i</sub>/Q<sub>i</sub> est grand (on sous-estime), plus la pénalité logarithmique explose.</p>
+                <p style="margin-top: 1rem;">C'est pourquoi l'entropie croisée est une excellente fonction de perte pour l'apprentissage automatique : elle pénalise sévèrement les prédictions confiantes mais fausses.</p>
+            </div>
+
+            <button class="button" onclick="nextSection(5)">Voir l'application en IA →</button>
+        </div>
+
+        <!-- Section 5: Application LLM -->
+        <div class="section" id="section5">
+            <h2>🤖 Application : Entraînement d'un LLM</h2>
+
+            <div class="scenario">
+                <p><strong>Contexte :</strong> Un modèle de langage apprend à prédire le mot suivant.</p>
+                <p style="margin-top: 1rem;"><strong>Phrase d'entraînement :</strong> "Le chat dort sur le ____"</p>
+                <p style="margin-top: 0.5rem;"><strong>Mot réel :</strong> "canapé" (probabilité 1.0)</p>
+            </div>
+
+            <h3>Évolution pendant l'entraînement</h3>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Époque</th>
+                            <th>Prédiction "canapé"</th>
+                            <th>Prédiction "tapis"</th>
+                            <th>Prédiction "lit"</th>
+                            <th>Cross-Entropy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>0</strong> (initial)</td>
+                            <td>0.10</td>
+                            <td>0.40</td>
+                            <td>0.50</td>
+                            <td style="color: var(--accent); font-weight: 700;">3.322 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>10</strong></td>
+                            <td>0.25</td>
+                            <td>0.35</td>
+                            <td>0.40</td>
+                            <td style="color: var(--warning); font-weight: 700;">2.000 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>50</strong></td>
+                            <td>0.50</td>
+                            <td>0.30</td>
+                            <td>0.20</td>
+                            <td style="color: var(--warning); font-weight: 700;">1.000 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>100</strong></td>
+                            <td>0.70</td>
+                            <td>0.20</td>
+                            <td>0.10</td>
+                            <td style="color: var(--success); font-weight: 700;">0.515 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>200</strong></td>
+                            <td>0.90</td>
+                            <td>0.07</td>
+                            <td>0.03</td>
+                            <td style="color: var(--success); font-weight: 700;">0.152 bits</td>
+                        </tr>
+                        <tr>
+                            <td><strong>500</strong></td>
+                            <td>0.98</td>
+                            <td>0.01</td>
+                            <td>0.01</td>
+                            <td style="color: var(--success); font-weight: 700;">0.029 bits</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
+                <canvas id="trainingGraph" width="700" height="400" style="max-width: 100%;"></canvas>
+            </div>
+
+            <div class="info-box">
+                <p><strong>📉 Observation :</strong> La cross-entropy diminue progressivement à mesure que le modèle apprend.</p>
+                <p style="margin-top: 1rem;"><strong>Objectif :</strong> Minimiser H(P, Q) = -log₂(Q("canapé")) quand P("canapé") = 1</p>
+                <p style="margin-top: 1rem;">Plus le modèle est confiant dans la bonne prédiction, plus la loss est faible.</p>
+            </div>
+
+            <h3>Pourquoi la cross-entropy en ML ?</h3>
+            <div class="scenario">
+                <p><strong>✓ Dérivable partout</strong> (essentiel pour la rétropropagation)</p>
+                <p style="margin-top: 0.5rem;"><strong>✓ Pénalise fortement les erreurs confiantes</strong> (comme on l'a vu)</p>
+                <p style="margin-top: 0.5rem;"><strong>✓ Convexe pour les réseaux linéaires</strong> (facilite l'optimisation)</p>
+                <p style="margin-top: 0.5rem;"><strong>✓ Fondement théorique solide</strong> (théorie de l'information)</p>
+            </div>
+
+            <button class="button" onclick="completeActivity()">Terminer l'activité →</button>
+        </div>
+
+        <!-- Section finale -->
+        <div class="section" id="completion" style="display: none;">
+            <div class="completion-message">
+                <div class="completion-icon">🎉</div>
+                <h2 style="color: var(--success);">Félicitations !</h2>
+                <p style="margin-top: 1rem; font-size: 1.2rem;">Vous maîtrisez maintenant le concept d'entropie croisée et son rôle fondamental en apprentissage automatique.</p>
+                
+                <div style="text-align: left; margin-top: 2rem; background: rgba(0, 0, 0, 0.2); padding: 2rem; border-radius: 10px;">
+                    <h3 style="color: var(--warning); margin-top: 0;">🎓 Ce que vous avez appris :</h3>
+                    <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+                        <li>La définition de l'entropie croisée H(P,Q)</li>
+                        <li>La divergence de Kullback-Leibler et sa signification</li>
+                        <li>Pourquoi sous-estimer un événement probable est très coûteux</li>
+                        <li>Comment la cross-entropy guide l'entraînement des LLMs</li>
+                        <li>Le lien entre théorie de l'information et IA moderne</li>
+                    </ul>
+                </div>
+
+                <div class="info-box" style="margin-top: 2rem;">
+                    <p><strong>🔗 Pour aller plus loin :</strong></p>
+                    <p style="margin-top: 0.5rem;">• Explorez comment les Transformers utilisent la cross-entropy pour la génération de texte</p>
+                    <p style="margin-top: 0.5rem;">• Étudiez les variantes : focal loss, label smoothing</p>
+                    <p style="margin-top: 0.5rem;">• Approfondissez la théorie de l'information de Shannon</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        let totalSections = 5;
+
+        function nextSection(sectionNum) {
+            const current = document.getElementById(`section${currentSection}`);
+            current.classList.remove('active');
+            current.classList.add('completed');
+            
+            currentSection = sectionNum;
+            const next = document.getElementById(`section${sectionNum}`);
+            next.classList.add('active');
+            
+            updateProgress();
+            next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            // Draw graphs when reaching appropriate sections
+            if (sectionNum === 4) {
+                setTimeout(drawLogGraph, 100);
+            }
+            if (sectionNum === 5) {
+                setTimeout(drawTrainingGraph, 100);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+        }
+
+        function completeActivity() {
+            document.getElementById('section5').classList.remove('active');
+            document.getElementById('section5').classList.add('completed');
+            document.getElementById('completion').style.display = 'block';
+            document.getElementById('completion').classList.add('active');
+            currentSection = 6;
+            updateProgress();
+            document.getElementById('completion').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function drawLogGraph() {
+            const canvas = document.getElementById('logGraph');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            const margin = { top: 40, right: 40, bottom: 60, left: 70 };
+            const graphWidth = width - margin.left - margin.right;
+            const graphHeight = height - margin.top - margin.bottom;
+            
+            // Clear
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Axes
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top);
+            ctx.lineTo(margin.left, height - margin.bottom);
+            ctx.lineTo(width - margin.right, height - margin.bottom);
+            ctx.stroke();
+            
+            // Function: Pi * log2(Pi/Qi)
+            // Let's plot for Pi = 0.8 (expert's probability for D1)
+            const Pi = 0.8;
+            const xMin = 0.01, xMax = 1.0;
+            const yMax = 4;
+            
+            const xToCanvas = (x) => margin.left + ((x - xMin) / (xMax - xMin)) * graphWidth;
+            const yToCanvas = (y) => height - margin.bottom - (y / yMax) * graphHeight;
+            
+            // Grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 0.5;
+            for (let y = 0; y <= 4; y++) {
+                ctx.beginPath();
+                ctx.moveTo(margin.left, yToCanvas(y));
+                ctx.lineTo(width - margin.right, yToCanvas(y));
+                ctx.stroke();
+            }
+            
+            // Y-axis labels
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            for (let y = 0; y <= 4; y++) {
+                ctx.fillText(y.toFixed(1), margin.left - 10, yToCanvas(y));
+            }
+            
+            // X-axis labels
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            for (let x = 0.2; x <= 1.0; x += 0.2) {
+                const canvasX = xToCanvas(x);
+                ctx.fillText(x.toFixed(1), canvasX, height - margin.bottom + 10);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(canvasX, height - margin.bottom);
+                ctx.lineTo(canvasX, height - margin.bottom + 5);
+                ctx.stroke();
+            }
+            
+            // Labels
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('Qi (probabilité estimée)', width / 2, height - 15);
+            
+            ctx.save();
+            ctx.translate(20, height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.fillText('Pénalité (bits)', 0, 0);
+            ctx.restore();
+            
+            // Plot curve
+            ctx.strokeStyle = '#e94560';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            let firstPoint = true;
+            for (let Qi = xMin; Qi <= xMax; Qi += 0.001) {
+                const penalty = Pi * Math.log2(Pi / Qi);
+                if (penalty >= 0 && penalty <= yMax) {
+                    const x = xToCanvas(Qi);
+                    const y = yToCanvas(penalty);
+                    
+                    if (firstPoint) {
+                        ctx.moveTo(x, y);
+                        firstPoint = false;
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+            }
+            ctx.stroke();
+            
+            // Mark student points
+            // Student 1: Q1 = 0.5, penalty = 0.8 * log2(0.8/0.5) = 0.542
+            const Q1 = 0.5;
+            const penalty1 = Pi * Math.log2(Pi / Q1);
+            ctx.fillStyle = '#6a89cc';
+            ctx.beginPath();
+            ctx.arc(xToCanvas(Q1), yToCanvas(penalty1), 8, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#6a89cc';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Étudiant 1', xToCanvas(Q1) + 12, yToCanvas(penalty1));
+            
+            // Student 2: Q2 = 0.15, penalty = 0.8 * log2(0.8/0.15) = 1.932
+            const Q2 = 0.15;
+            const penalty2 = Pi * Math.log2(Pi / Q2);
+            ctx.fillStyle = '#e94560';
+            ctx.beginPath();
+            ctx.arc(xToCanvas(Q2), yToCanvas(penalty2), 8, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.fillStyle = '#e94560';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Étudiant 2', xToCanvas(Q2) + 12, yToCanvas(penalty2) - 15);
+            
+            // Title
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Pénalité = 0.8 × log₂(0.8 / Qi)', width / 2, 20);
+        }
+
+        function drawTrainingGraph() {
+            const canvas = document.getElementById('trainingGraph');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            const margin = { top: 40, right: 40, bottom: 60, left: 70 };
+            const graphWidth = width - margin.left - margin.right;
+            const graphHeight = height - margin.top - margin.bottom;
+            
+            // Data points
+            const data = [
+                { epoch: 0, ce: 3.322 },
+                { epoch: 10, ce: 2.000 },
+                { epoch: 50, ce: 1.000 },
+                { epoch: 100, ce: 0.515 },
+                { epoch: 200, ce: 0.152 },
+                { epoch: 500, ce: 0.029 }
+            ];
+            
+            const xMax = 500;
+            const yMax = 3.5;
+            
+            const xToCanvas = (x) => margin.left + (x / xMax) * graphWidth;
+            const yToCanvas = (y) => height - margin.bottom - (y / yMax) * graphHeight;
+            
+            // Clear
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, width, height);
+            
+            // Grid
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 0.5;
+            for (let y = 0; y <= 3.5; y += 0.5) {
+                ctx.beginPath();
+                ctx.moveTo(margin.left, yToCanvas(y));
+                ctx.lineTo(width - margin.right, yToCanvas(y));
+                ctx.stroke();
+            }
+            
+            // Axes
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(margin.left, margin.top);
+            ctx.lineTo(margin.left, height - margin.bottom);
+            ctx.lineTo(width - margin.right, height - margin.bottom);
+            ctx.stroke();
+            
+            // Y-axis labels
+            ctx.fillStyle = '#333';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            for (let y = 0; y <= 3.5; y += 0.5) {
+                ctx.fillText(y.toFixed(1), margin.left - 10, yToCanvas(y));
+            }
+            
+            // X-axis labels
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            for (let x = 0; x <= 500; x += 100) {
+                const canvasX = xToCanvas(x);
+                ctx.fillText(x, canvasX, height - margin.bottom + 10);
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(canvasX, height - margin.bottom);
+                ctx.lineTo(canvasX, height - margin.bottom + 5);
+                ctx.stroke();
+            }
+            
+            // Labels
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 16px Arial';
+            ctx.fillText('Époque', width / 2, height - 15);
+            
+            ctx.save();
+            ctx.translate(20, height / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.fillText('Cross-Entropy (bits)', 0, 0);
+            ctx.restore();
+            
+            // Plot line
+            ctx.strokeStyle = '#06d6a0';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(xToCanvas(data[0].epoch), yToCanvas(data[0].ce));
+            for (let i = 1; i < data.length; i++) {
+                ctx.lineTo(xToCanvas(data[i].epoch), yToCanvas(data[i].ce));
+            }
+            ctx.stroke();
+            
+            // Plot points
+            for (let i = 0; i < data.length; i++) {
+                const x = xToCanvas(data[i].epoch);
+                const y = yToCanvas(data[i].ce);
+                
+                ctx.fillStyle = '#06d6a0';
+                ctx.beginPath();
+                ctx.arc(x, y, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                ctx.fillStyle = '#333';
+                ctx.font = '11px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(data[i].ce.toFixed(2), x, y - 15);
+            }
+            
+            // Title
+            ctx.fillStyle = '#333';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Diminution de la Cross-Entropy pendant l\'entraînement', width / 2, 20);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+</body>
+</html>
