@@ -3,7 +3,7 @@
 [![Deployed](https://img.shields.io/badge/statut-en%20ligne-brightgreen)](https://VOTRE-USERNAME.github.io/entropie-interactive/)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-> **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon à travers des exercices interactifs et des visualisations dynamiques.
+> **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon et son utilisation en Apprentissage Machine.
 
 ---
 
