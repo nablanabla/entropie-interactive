@@ -6,6 +6,7 @@
 > **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon et son utilisation en Apprentissage Machine.
 
 ---
+# 1 - L'entropie
 
 ## 🎯 Objectif
 
@@ -55,7 +56,7 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
 
 ---
 
-## 📖 Contenu de l'activité
+## 📖 Contenu de l'activité 1
 
 L'activité se compose de **7 sections progressives** :
 
@@ -79,6 +80,76 @@ L'activité se compose de **7 sections progressives** :
 
 ---
 
+# 2 - L'entropie croisée
+
+## 📚 Contexte historique
+
+<p align="center">
+  <img src="assets/images/Image1.jpg" alt="Shannon Schema" width="400">
+  <br>
+  <em>Figure 1 : Schéma de communication de Shannon (1948)</em>
+</p>
+
+## 📖 Activité 2 : L'Entropie Croisée
+
+### Problématique
+
+**Comment mesurer l'écart entre deux distributions de probabilité ?**
+
+Cette question est fondamentale en apprentissage machine : elle permet d'évaluer à quel point une prédiction s'écarte de la réalité.
+
+### Le problème des deux étudiants
+
+#### 🩺 Contexte médical
+
+Deux étudiants en médecine doivent établir un diagnostic différentiel pour un patient présentant des symptômes complexes. Un expert a analysé le cas et donne sa distribution de probabilité pour 4 diagnostics possibles :
+
+**Distribution de l'expert (P) :**
+- Diagnostic D₁ : **80%** (diagnostic principal)
+- Diagnostic D₂ : **10%**
+- Diagnostic D₃ : **5%**
+- Diagnostic D₄ : **5%**
+
+Les deux étudiants proposent leurs estimations :
+
+**Étudiant 1 (Q₁) :**
+- D₁ : 50% | D₂ : 20% | D₃ : 15% | D₄ : 15%
+- *Approche prudente, sous-estime modérément D₁*
+
+**Étudiant 2 (Q₂) :**
+- D₁ : 15% | D₂ : 35% | D₃ : 25% | D₄ : 25%
+- *Erreur majeure : pense que D₁ est peu probable !*
+
+
+
+
+
+### Contenu de l'activité 2
+
+L'activité se compose de **5 sections progressives** :
+
+1. **🎯 Définition du problème** - Entropie croisée H(P,Q) et divergence KL
+2. **🩺 Cas pratique** - Les deux étudiants et leurs estimations diagnostiques
+3. **📊 Comparaison des métriques** - Distance L1 vs Divergence KL
+4. **🔍 Explication visuelle** - Pourquoi la divergence KL pénalise les grosses erreurs
+5. **🤖 Application aux LLMs** - Comment la cross-entropy guide l'entraînement
+
+### Objectifs d'apprentissage
+
+À l'issue de l'activité, l'apprenant sera capable de :
+- ✅ Définir l'entropie croisée H(P,Q)
+- ✅ Comprendre la divergence de Kullback-Leibler
+- ✅ Expliquer pourquoi sous-estimer un événement probable est très coûteux
+- ✅ Interpréter la cross-entropy comme fonction de perte en ML
+- ✅ Comprendre comment les LLMs sont entraînés avec cette métrique
+
+<p align="center">
+  <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie-croisee/" target="_blank" rel="noopener noreferrer">
+    <strong>🚀 Lancer l'Activité 2 : L'Entropie Croisée</strong>
+  </a>
+</p>
+
+---
 
 ## 🎓 Utilisation pédagogique
 
@@ -93,6 +164,9 @@ Cette activité vise à faire un découvrir le concept d'information au sens de 
 ## 📝 Références
 
 Shannon, C. E. (1948). A mathematical theory of communication. *The Bell System Technical Journal*, **27**(3), 379–423.
+
+
+Kullback, S., & Leibler, R. A. (1951). On information and sufficiency. *The Annals of Mathematical Statistics*, **22**(1), 79–86.
 
 ---
 
