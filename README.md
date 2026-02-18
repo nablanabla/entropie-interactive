@@ -72,7 +72,7 @@ L'activité se compose de **7 sections progressives** :
 ## 🌐 Accès à l'activité
 
 <p align="center">
-  <a href="https://nablanabla.github.io/entropie-interactive/" target="_blank" rel="noopener noreferrer">
+  <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie/" target="_blank" rel="noopener noreferrer">
     <strong>🚀 Lancer l'activité interactive</strong>
   </a>
 </p>
