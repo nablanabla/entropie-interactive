@@ -49,7 +49,7 @@ L'observation clé de Shannon est qu'un message est d'autant plus informatif que
 Ces deux remarques sont au coeur de l'apprentissage machine.
 
 ### Exemple 1
-Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec).
+Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait, cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec).
 
 ### Exemple 2
 Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il devra beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), le médecin est dans une très forte ***certitude***, il sait immédiatement ce qu'il faut faire (injecter un sérum antivenimeux).
@@ -76,7 +76,7 @@ En 1951, Solomon Kullback et Richard Leibler étendent le concept d'entropie de 
 <p align="center">
   <img src="assets/images/image3.png" alt="Kullbach-Leiber article" width="400">
   <br>
-  <em>Figure 3 : L'article fondateur de Kullbach et Leiber (1951)</em>
+  <em>Figure 3 : L'article fondateur de Kullback et Leiber (1951)</em>
 </p>
 
 
@@ -87,29 +87,22 @@ Cette question est fondamentale en apprentissage machine : elle permet d'évalue
 ### 🩺 Exemple : Évaluer deux étudiants résidents en médecine 
 
 
-Deux étudiants en médecine doivent établir un diagnostic différentiel pour un patient présentant des symptômes complexes. Un expert a analysé le cas et donne sa distribution de probabilité pour 4 diagnostics possibles :
+Deux étudiants en médecine doivent établir un diagnostic différentiel pour un patient présentant des symptômes complexes. Un expert a analysé le cas et donne sa distribution de probabilité pour 4 diagnostics possibles. On soumet ces diagnostics à deux étudiants en médecine qui doivent établir leur propre distribution de probabilité (sans connaître celle de l'expert évidemment). 
 
-**Distribution de l'expert (P) :**
-- Diagnostic D₁ : **80%** (diagnostic principal)
-- Diagnostic D₂ : **10%**
-- Diagnostic D₃ : **5%**
-- Diagnostic D₄ : **5%**
+**Les distributions de probabilité obtenus :**
 
-Les deux étudiants proposent leurs estimations :
+| | **D₁** | **D₂** | **D₃** | **D₄** | **Caractéristique** |
+|---|---|---|---|---|---|
+| **Expert (P)** | **80%** | 10% | 5% | 5% | Distribution de référence |
+| **Étudiant 1 (Q₁)** | 50% | 20% | 15% | 15% | *Approche prudente, sous-estime modérément D₁* |
+| **Étudiant 2 (Q₂)** | 15% | 35% | 25% | 25% | *Erreur majeure : pense que D₁ est peu probable !* |
 
-**Étudiant 1 (Q₁) :**
-- D₁ : 50% | D₂ : 20% | D₃ : 15% | D₄ : 15%
-- *Approche prudente, sous-estime modérément D₁*
-
-**Étudiant 2 (Q₂) :**
-- D₁ : 15% | D₂ : 35% | D₃ : 25% | D₄ : 25%
-- *Erreur majeure : pense que D₁ est peu probable !*
-
-Nous répondons à cette problématique dans l'activité 2 :
+**Question : quel étudiant est le plus proche de l'expert ?**
+Pour y répondre passer à l'activité 2:
 
 <p align="center">
   <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie-croisee/" target="_blank" rel="noopener noreferrer">
-    <strong>🚀 Lancer l'Activité 2 : L'Entropie Croisée</strong>
+    <strong>🚀 Lancer l'Activité 2 : "L'entropie croisée"</strong>
   </a>
 </p>
 
