@@ -41,6 +41,15 @@ L'activité consiste à découvrir le point suivant :
 
 ---
 
+## 📚 Apprentissage et incertitude
+
+L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible.
+
+### Exemple 1
+Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec)
+
+---
+
 ## 📖 Contenu de l'activité
 
 L'activité se compose de **7 sections progressives** :
