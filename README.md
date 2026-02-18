@@ -25,16 +25,25 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 </p>
 
 
-Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).
+Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  "Messages" et "transmetteurs" sont à prendre dans un sens très large, ils peuvent désigner :
+
+
 
 <p align="center">
   <img src="assets/images/Image2.jpg" alt="Concept Entropie" width="700">
   <br>
-  <em>Figure 2 : Illustration du concept d'entropie</em>
+  <em>Figure 2 : Le problème initial de Shannon (1948).</em>
 </p>
 
+| Messages | Transmetteurs |
+|----------|---------------|
+| Des textes | Un microphone téléphonique (qui convertit la voix en signaux électriques) |
+| Des signaux vocaux | Un équipement télégraphique (codant les lettres en impulsions) |
+| Des images | Un émetteur radio (modulant l'information sur une onde porteuse) |
+| Des données binaires | Un circuit électrique avec des portes logiques "ouvert/fermé" |
 
-La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au sens de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
+
+La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au *sens* de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
 
 L'activité consiste à découvrir le point suivant :
 
