@@ -6,7 +6,7 @@
 > **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon et son utilisation en Apprentissage Machine.
 
 ---
-# 1 - L'entropie
+# 📖 Activité 1 - L'entropie
 
 ## 🎯 Objectif
 
@@ -56,21 +56,8 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
 
 ---
 
-## 📖 Contenu de l'activité 1
 
-L'activité se compose de **7 sections progressives** :
-
-1. **Introduction** - Découverte du concept à travers une expérience simple
-2. **Jeu des gobelets** - Manipulation interactive pour comprendre la probabilité
-3. **Formule mathématique** - Introduction de la formule de Shannon
-4. **Calcul de l'entropie** - Exercices pratiques
-5. **Visualisation graphique** - Courbe logarithmique de l'entropie
-6. **Connexion avec l'IA** - Applications dans l'apprentissage automatique
-7. **Synthèse** - Récapitulatif et ouvertures
-
----
-
-## 🌐 Accès à l'activité
+## 🌐 Pour clarifier ces différents concepts veuillez lancer l'activité 1
 
 <p align="center">
   <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie/" target="_blank" rel="noopener noreferrer">
@@ -80,27 +67,25 @@ L'activité se compose de **7 sections progressives** :
 
 ---
 
-# 2 - L'entropie croisée
+# 📖 Activité 2 - L'entropie croisée
 
 ## 📚 Contexte historique
 
+En 1951, Solomon Kullback et Richard Leibler étendent le concept d'entropie de Shannon (qui ne mesure l'incertitude que d'une seule distribution) pour mesurer la distance entre deux distributions statistiques.
+
 <p align="center">
-  <img src="assets/images/Image1.jpg" alt="Shannon Schema" width="400">
+  <img src="assets/images/image3.png" alt="Kullbach-Leiber article" width="400">
   <br>
-  <em>Figure 1 : Schéma de communication de Shannon (1948)</em>
+  <em>Figure 3 : L'article fondateur de Kullbach et Leiber (1951)</em>
 </p>
 
-## 📖 Activité 2 : L'Entropie Croisée
 
-### Problématique
-
-**Comment mesurer l'écart entre deux distributions de probabilité ?**
+### Problématique: comment mesurer l'écart entre deux distributions de probabilité ?
 
 Cette question est fondamentale en apprentissage machine : elle permet d'évaluer à quel point une prédiction s'écarte de la réalité.
 
-### Le problème des deux étudiants
+### 🩺 Exemple : Évaluer deux étudiants résidents en médecine 
 
-#### 🩺 Contexte médical
 
 Deux étudiants en médecine doivent établir un diagnostic différentiel pour un patient présentant des symptômes complexes. Un expert a analysé le cas et donne sa distribution de probabilité pour 4 diagnostics possibles :
 
@@ -120,28 +105,7 @@ Les deux étudiants proposent leurs estimations :
 - D₁ : 15% | D₂ : 35% | D₃ : 25% | D₄ : 25%
 - *Erreur majeure : pense que D₁ est peu probable !*
 
-
-
-
-
-### Contenu de l'activité 2
-
-L'activité se compose de **5 sections progressives** :
-
-1. **🎯 Définition du problème** - Entropie croisée H(P,Q) et divergence KL
-2. **🩺 Cas pratique** - Les deux étudiants et leurs estimations diagnostiques
-3. **📊 Comparaison des métriques** - Distance L1 vs Divergence KL
-4. **🔍 Explication visuelle** - Pourquoi la divergence KL pénalise les grosses erreurs
-5. **🤖 Application aux LLMs** - Comment la cross-entropy guide l'entraînement
-
-### Objectifs d'apprentissage
-
-À l'issue de l'activité, l'apprenant sera capable de :
-- ✅ Définir l'entropie croisée H(P,Q)
-- ✅ Comprendre la divergence de Kullback-Leibler
-- ✅ Expliquer pourquoi sous-estimer un événement probable est très coûteux
-- ✅ Interpréter la cross-entropy comme fonction de perte en ML
-- ✅ Comprendre comment les LLMs sont entraînés avec cette métrique
+Nous répondons à cette problématique dans l'activité 2 :
 
 <p align="center">
   <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie-croisee/" target="_blank" rel="noopener noreferrer">
