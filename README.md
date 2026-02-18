@@ -57,11 +57,11 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
 ---
 
 
-## 🌐 Pour clarifier ces différents concepts veuillez lancer l'activité 1
+## 🌐 Pour clarifier ces différents concepts, allons à la rencontre de l'entropie
 
 <p align="center">
   <a href="https://nablanabla.github.io/entropie-interactive/activite-entropie/" target="_blank" rel="noopener noreferrer">
-    <strong>🚀 Lancer l'activité interactive</strong>
+    <strong>🚀 Lancer l'activité interactive "À la découverte de l'entropie"</strong>
   </a>
 </p>
 
