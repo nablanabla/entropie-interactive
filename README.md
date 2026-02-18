@@ -1,15 +1,15 @@
-# Découvrir l'Entropie - Activité Interactive
+# Découvrir l'Entropie 
 
 [![Deployed](https://img.shields.io/badge/statut-en%20ligne-brightgreen)](https://VOTRE-USERNAME.github.io/entropie-interactive/)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
-> **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon à travers des exercices interactifs et des visualisations dynamiques.
+> **Activité pédagogique interactive** pour découvrir le concept d'entropie de Shannon et son utilisation en Apprentissage Machine.
 
 ---
 
 ## 🎯 Objectif
 
-Cette activité permet aux étudiants en sciences de la santé de découvrir la théorie de l'information de Claude Shannon et son application dans le domaine de l'intelligence artificielle.
+Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de discuter son application dans le domaine de l'intelligence artificielle.
 
 
 ---
@@ -33,7 +33,9 @@ Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un cé
 </p>
 
 
-La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au sens de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le bit (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler entropie.
+La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au sens de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
+
+L'activité consiste à découvrir le point suivant :
 
 **L'entropie correspond au nombre minimum théorique de bits qu'il faut pour coder un message.**
 
