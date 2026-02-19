@@ -7,6 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- KaTeX CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <!-- KaTeX JS (sans defer !) -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <!-- Auto-render extension (sans defer !) -->
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
     <style>
         :root {
             --primary: #1a1a2e;
@@ -699,28 +706,28 @@
                     </div>
                     <div class="option" onclick="selectOption(this, 'q4', false)">
                         <span class="option-letter">B</span>
-                        <span>Nombre de questions = 1/p</span>
+                        <span>Nombre de questions = $1/p$</span>
                     </div>
                     <div class="option" onclick="selectOption(this, 'q4', false)">
                         <span class="option-letter">C</span>
-                        <span>Nombre de questions = log₂(p)</span>
+                        <span>Nombre de questions = $\log_₂(p)$</span>
                     </div>
                     <div class="option" onclick="selectOption(this, 'q4', true)">
                         <span class="option-letter">D</span>
-                        <span>Nombre de questions = - log₂(p)</span>
+                        <span>Nombre de questions = $- \log_2(p)$</span>
                     </div>
                 </div>
-                <p style="margin-top: 1rem;"> <strong> Hint : La fonction mathématique log₂(x) </strong> est la fonction qui permet d'extraire la puissance lorsqu'un nombre x est écrit en base 2. </p>
-                 <p style="margin-top: 1rem;"> <strong> Exemple:</strong> log₂(2<sup>1</sup>)=1, log₂(2<sup>2</sup>)=2 , log₂(2<sup>3</sup>)=3,...log₂(2<sup>n</sup>)=n<div class="etc"></div> 
+                <p style="margin-top: 1rem;"> <strong> Hint : La fonction mathématique $\log_2(x)$ </strong> est la fonction qui permet d'extraire la puissance lorsqu'un nombre x est écrit en base 2. </p>
+                 <p style="margin-top: 1rem;"> <strong> Exemple: $\log_2(2^1)=1, \log_2(2^2)=2, \log_2(2^3)=3, \ldots, \log_2(2^n)=n$<div class="etc"></div> 
                 <div class="feedback" id="feedback-q4"></div>
             </div>
 
             <div class="formula-box" style="display: none;" id="formulaReveal">
             <p><strong>🔑 Formule de l'entropie de Shannon (cas équiprobable):</strong></p>
-            <div class="formula">H = -log₂(p)</div>
+            <div class="formula">$H=-\log_2(p)$</div>
             <p style="margin-top: 1rem; font-size: 1.4rem; font-weight: 600;">
-                     Dans le cas d'événements équiprobables, l'information <strong>« la balle est sous un des gobelets »</strong> « vaut » 
-        <strong><math><mo>-</mo><msub><mo>log</mo><mn>2</mn></msub><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow></math></strong>.
+                     Dans le cas d'événements équiprobables, l'information <em>la balle est sous un des gobelets</em> « vaut » 
+        <strong>$-\log_2(p)$</strong>.
             </p>
             </div>
 
@@ -736,7 +743,7 @@
                     <p><strong>💡 Interprétation :</strong></p>
                     <p style="margin-top: 0.5rem;">
                         Plus la probabilité <math><mi>p</mi></math> est <strong>petite</strong>, 
-                        plus l'information nécessaire <math><mo>-</mo><msub><mo>log</mo><mn>2</mn></msub><mrow><mo>(</mo><mi>p</mi><mo>)</mo></mrow></math> 
+                        plus l'information nécessaire $-\log_2(p)$ 
                         est <strong>grande</strong>.
                     </p>
                     <p style="margin-top: 1rem;">
@@ -747,7 +754,7 @@
             </div>
 
             <button class="button" id="btn-section5" disabled onclick="nextSection(6)">Passer aux cas non équiprobables →</button>
-            <button class="button" id="btn-section5" disabled onclick="nextSection(6)">Passer aux cas non équiprobables →</button>
+            
         </div>
 
         <!-- Section 6: Cas non équiprobable -->
@@ -793,12 +800,14 @@
              |        |
              B        C
       (2 questions) (2 questions)
+
+Le nombre moyen de question est  1/2 × 1 + ...
     </div>
 
             <div class="question-box">
                 <p class="question-text">Quel est le nombre MOYEN de questions nécessaires avec cette stratégie ?</p>
                 <p style="font-size: 0.95rem; color: var(--text-dim); margin-top: 0.5rem;">
-                    Indice : Calculez (1/2 × 1) + (1/4 × 2) + (1/4 × 2)
+                    
                 </p>
                 <div class="options">
                     <div class="option" onclick="selectOption(this, 'q5', false)">
@@ -833,87 +842,29 @@
             </div>
 
             <div class="formula-box">
-    <p><strong>Formule générale de l'entropie :</strong></p>
-    <div class="formula" style="font-size: 2rem; margin: 2rem 0;">
-        <math display="block">
-            <mi>H</mi>
-            <mrow>
-                <mo>(</mo>
-                <mi>X</mi>
-                <mo>)</mo>
-            </mrow>
-            <mo>=</mo>
-            <mo>-</mo>
-            <munder>
-                <mo>∑</mo>
-                <mi>i</mi>
-            </munder>
-            <msub>
-                <mi>p</mi>
-                <mi>i</mi>
-            </msub>
-            <mo>×</mo>
-            <msub>
-                <mo>log</mo>
-                <mn>2</mn>
-            </msub>
-            <mrow>
-                <mo>(</mo>
-                <msub>
-                    <mi>p</mi>
-                    <mi>i</mi>
-                </msub>
-                <mo>)</mo>
-            </mrow>
-        </math>
-    </div>
-    <p style="margin-top: 1.5rem; font-size: 1.1rem;">
-        où <math><msub><mi>p</mi><mi>i</mi></msub></math> est la probabilité de chaque événement <math><mi>i</mi></math>
-    </p>
+                <p><strong>Formule générale de l'entropie :</strong></p>
+                 <div class="formula" style="font-size: 2rem; margin: 2rem 0;">
+                    $$H=-\displaystyle \sum_i p_i \times \log_2(p_i)$$
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 1.1rem;">
+                où $p_i$ est la probabilité de chaque événement indicé sur $i$
+                </p>
     
-    <div style="background: rgba(255, 209, 102, 0.1); padding: 1.5rem; border-radius: 10px; margin-top: 2rem; border-left: 4px solid var(--warning);">
-        <p><strong>🔍 Cas particulier :</strong></p>
-        <p style="margin-top: 0.5rem;">
-            Si tous les <math><msub><mi>p</mi><mi>i</mi></msub></math> sont égaux 
-            (<math><msub><mi>p</mi><mi>i</mi></msub> <mo>=</mo> <mfrac><mn>1</mn><mi>n</mi></mfrac></math>), 
-            on retrouve :
-        </p>
-        <div style="font-size: 1.5rem; margin: 1rem 0; text-align: center; color: var(--warning); font-family: 'Space Mono', monospace;">
-            <math display="block">
-                <mi>H</mi>
-                <mrow>
-                    <mo>(</mo>
-                    <mi>X</mi>
-                    <mo>)</mo>
-                </mrow>
-                <mo>=</mo>
-                <msub>
-                    <mo>log</mo>
-                    <mn>2</mn>
-                </msub>
-                <mrow>
-                    <mo>(</mo>
-                    <mi>n</mi>
-                    <mo>)</mo>
-                </mrow>
-                <mo>=</mo>
-                <mo>-</mo>
-                <msub>
-                    <mo>log</mo>
-                    <mn>2</mn>
-                </msub>
-                <mrow>
-                    <mo>(</mo>
-                    <mi>p</mi>
-                    <mo>)</mo>
-                </mrow>
-            </math>
-        </div>
-        <p style="color: var(--text-dim); font-size: 0.95rem;">
-            C'est la formule que nous avons découverte avec les gobelets équiprobables !
-        </p>
-    </div>
-</div>
+            </div>
+
+            <div style="background: rgba(255, 209, 102, 0.1); padding: 1.5rem; border-radius: 10px; margin-top: 2rem; border-left: 4px solid var(--warning);">
+                <p><strong>🔍 Cas particulier :</strong></p>
+                <p style="margin-top: 0.5rem;">
+                    Si tous les $p_i$ sont égaux ($p_i=\frac{1}{n}$), on retrouve :
+                </p>
+                <div
+                    style="font-size: 1.5rem; margin: 1rem 0; text-align: center; color: var(--warning); font-family: 'Space Mono', monospace;">
+                    $$H=\log_2(n)=-\log_2(p)$$
+                </div>
+                <p style="color: var(--text-dim); font-size: 0.95rem;">
+                    C'est la formule que nous avons découverte avec les gobelets équiprobables !
+                </p>
+            </div>
 
             <div class="question-box">
                 <p class="question-text">Que signifie une entropie élevée ?</p>
@@ -1287,6 +1238,18 @@ if (document.readyState === 'loading') {
 }
         // Initialize
         updateProgress();
+    </script>
+    <script>
+        // Rendre toutes les formules KaTeX après le chargement de la page
+        document.addEventListener("DOMContentLoaded", function () {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    { left: "$$", right: "$$", display: true },
+                    { left: "$", right: "$", display: false }
+                ],
+                throwOnError: false
+            });
+        });
     </script>
 </body>
 </html>
