@@ -78,7 +78,7 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
   </a>
 </p>
 
----
+
 
 ---
 ## 📚 Différence entre information au sens de Shannon et pertinence diagnostique
