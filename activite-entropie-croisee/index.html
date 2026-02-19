@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
     <style>
         :root {
             --primary: #1a1a2e;
@@ -406,9 +409,9 @@
                 <p><strong>Question centrale :</strong> Comment mesurer l'écart entre deux distributions de probabilité ?</p>
                 <p style="margin-top: 1rem;">Par exemple :</p>
                 <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                    <li>La distribution prédite par un modèle vs la vraie distribution</li>
+                    <li>La distribution prédite par un modèle vs la distribution idéale</li>
                     <li>L'estimation d'un étudiant vs l'avis d'un expert</li>
-                    <li>Les probabilités calculées par une IA vs les données observées</li>
+                    <li>Les probabilités d'apparition du prochain token calculé par un LLM vs la probabilité observée dans le corpus d'entrainement</li>
                 </ul>
             </div>
 
@@ -450,19 +453,7 @@
                 </div>
                 <p style="margin-top: 1.5rem;">où</p>
                 <div class="formula" style="font-size: 1.5rem; margin-top: 1rem;">
-                    <math display="block">
-                        <msub><mi>D</mi><mi>KL</mi></msub>
-                        <mrow><mo>(</mo><mi>P</mi><mo>||</mo><mi>Q</mi><mo>)</mo></mrow>
-                        <mo>=</mo>
-                        <munder><mo>∑</mo><mi>i</mi></munder>
-                        <msub><mi>P</mi><mi>i</mi></msub>
-                        <mo>×</mo>
-                        <msub><mo>log</mo><mn>2</mn></msub>
-                        <mfrac>
-                            <msub><mi>P</mi><mi>i</mi></msub>
-                            <msub><mi>Q</mi><mi>i</mi></msub>
-                        </mfrac>
-                    </math>
+                    $$H(P,Q) = -\sum_i P_i \log_2(Q_i)$$
                 </div>
             </div>
 
