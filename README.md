@@ -81,28 +81,7 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
 
 
 ---
-## 📚 Différence entre information au sens de Shannon et pertinence diagnostique
 
-### Le piège conceptuel
-
-La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
-
-**Mais attention :** En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique).
-
-### Les quatre cas possibles
-
-| | **Symptôme fréquent** (p élevé) | **Symptôme rare** (p faible) |
-|---|---|---|
-| **Symptôme spécifique**<br>(peu de diagnostics compatibles) | 📉 **Faible** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Fièvre dans la grippe*<br>Symptôme banal mais qui oriente bien | 📈 **Haute** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Éruption lupique pathognomonique*<br>Rare ET spécifique = diagnostic quasi certain |
-| **Symptôme non spécifique**<br>(beaucoup de diagnostics compatibles) | 📉 **Faible** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Fatigue vague*<br>Banal et compatible avec 100 maladies | 📈 **Haute** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Symptôme jamais décrit*<br>Surprenant mais on ne sait pas l'interpréter |
-
-
-
-Les deux concepts sont **indépendants** ! Un symptôme peut être très surprenant (haute information Shannon) sans pour autant réduire l'incertitude diagnostique.
-
-
-
----
 
 
 # 📖 Activité 2 - L'entropie croisée
@@ -145,6 +124,36 @@ Pour y répondre passer à l'activité 2:
 </p>
 
 ---
+
+## 📚 Pour conclure: Différence entre information au sens de Shannon et pertinence diagnostique
+
+### Le piège conceptuel
+
+La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
+
+**Mais attention :** En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique).
+
+### Les quatre cas possibles
+
+| | **Symptôme fréquent** (p élevé) | **Symptôme rare** (p faible) |
+|---|---|---|
+| **Symptôme spécifique**<br>(peu de diagnostics compatibles) | 📉 **Faible** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Fièvre dans la grippe*<br>Symptôme banal mais qui oriente bien | 📈 **Haute** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Éruption lupique pathognomonique*<br>Rare ET spécifique = diagnostic quasi certain |
+| **Symptôme non spécifique**<br>(beaucoup de diagnostics compatibles) | 📉 **Faible** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Fatigue vague*<br>Banal et compatible avec 100 maladies | 📈 **Haute** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Symptôme jamais décrit*<br>Surprenant mais on ne sait pas l'interpréter |
+
+
+
+Les deux concepts sont **indépendants** ! Un symptôme peut être très surprenant (haute information Shannon) sans pour autant réduire l'incertitude diagnostique.
+
+### 📖 Conclusion de ce parcours
+
+La théorie de l'information permet de :
+- ✅ Comprendre comment **mesurer l'information** et la relier au concept d'incertitude
+- ✅ Voir comment les **LLMs optimisent leurs prédictions** avec l'entropie croisée
+
+❌ La théorie de l'information ne permet **Pas** d'évaluer la pertinence de l'information pour le clinicien.
+
+---
+
 
 ## 🎓 Utilisation pédagogique
 
