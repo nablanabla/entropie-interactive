@@ -63,10 +63,48 @@ Ces deux remarques sont au coeur de l'apprentissage machine.
 Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait, cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec).
 
 ### Exemple 2
-Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il aura besoin de beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), le médecin est dans une très forte ***certitude***, il sait immédiatement ce qu'il faut faire (injecter un sérum antivenimeux).
+Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il aura besoin de beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), cela apporte beaucoup d'information au médecin. Ici il sait même immédiatement ce qu'il faut faire (injecter un sérum antivenimeux) ! 
+
 
 ---
+## 📚 Différence entre information au sens de Shannon et pertinence diagnostique
 
+### Le piège conceptuel
+
+La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
+
+**Mais attention :** En médecine, un symptôme peut être :
+- Très **informatif au sens de Shannon** (rare, surprenant) 
+- ET pourtant **peu utile diagnostiquement** (non spécifique)
+
+### Les quatre cas
+
+**1. Fréquent ET spécifique** *(Ex : Fièvre dans la grippe)*
+- Shannon : Peu d'information (attendu)
+- Diagnostic : ✅ Très utile (oriente fortement)
+
+**2. Rare ET spécifique** *(Ex : Éruption lupique pathognomonique)*
+- Shannon : Beaucoup d'information (surprenant)
+- Diagnostic : ✅ Très utile (diagnostic quasi certain)
+
+**3. Fréquent ET vague** *(Ex : Fatigue générale)*
+- Shannon : Peu d'information (banal)
+- Diagnostic : ❌ Peu utile (100 causes possibles)
+
+**4. Rare ET vague** *(Ex : Symptôme jamais décrit)*
+- Shannon : Énormément d'information (I → ∞)
+- Diagnostic : ❌ Inutile (on ne sait pas ce que c'est !)
+
+### 🎯 Conclusion
+
+**Shannon mesure la rareté/surprise, pas l'utilité diagnostique.**
+
+Les activités de ce parcours utilisent Shannon pour :
+- Comprendre comment **mesurer l'information**
+- Voir comment les **LLMs optimisent leurs prédictions** (entropie croisée)
+- Pas pour évaluer la qualité d'un raisonnement diagnostique !
+
+---
 
 ## 🌐 Pour clarifier ces différents concepts, allons à la rencontre de l'entropie
 
