@@ -21,7 +21,7 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 <p align="center">
   <img src="assets/images/Image1.jpg" alt="Shannon Schema" width="400">
   <br>
-  <em>Figure 1 : Schéma de communication de Shannon (1948)</em>
+  <em>Figure 1 : L'article fondateur de Shannon (1948)</em>
 </p>
 
 
@@ -63,10 +63,12 @@ Ces deux remarques sont au coeur de l'apprentissage machine.
 Imaginons que l'on soit un 27 février au Québec. Le message ***"Il fait froid aujourd'hui"*** est peu informatif, car sa probabilité d'apparaître un 27 février est très forte. En revanche le message ***"Il fait 15°C aujourd'hui"*** est à très haute valeur informative car sa probabilité est très très faible. De fait, cet évènement exceptionnel est arrivé une fois, en 2024 comme le relate [l'article suivant](https://www.journaldemontreal.com/2024/02/27/chaud-pour-un-mois-de-fevrier-des-records-de-temperature-battus-mardi-au-quebec).
 
 ### Exemple 2
-Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il aura besoin de beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), le médecin est dans une très forte ***certitude***, il sait immédiatement ce qu'il faut faire (injecter un sérum antivenimeux).
+Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si le patient déclare ***"j'ai mal à la gorge"*** (très fréquent et donc probable), le médecin reste dans une forte ***incertitude*** car le spectre de diagnostic est très très large à ce stade, il aura besoin de beaucoup plus d'information pertinente pour établir un diagnostic différentiel.  En revanche, si le patient déclare ***"je viens vous voir car je me suis fait mordre par un Mamba noir"*** (très peu probable), cela apporte beaucoup d'information au médecin. Ici il sait même immédiatement ce qu'il faut faire (injecter un sérum antivenimeux) ! 
+
+
+
 
 ---
-
 
 ## 🌐 Pour clarifier ces différents concepts, allons à la rencontre de l'entropie
 
@@ -76,7 +78,11 @@ Plaçons nous maintenant dans la peau d'un médecin qui reçoit un patient. Si l
   </a>
 </p>
 
+
+
 ---
+
+
 
 # 📖 Activité 2 - L'entropie croisée
 
@@ -118,6 +124,37 @@ Pour y répondre passer à l'activité 2:
 </p>
 
 ---
+
+## 📚 Pour conclure: Différence entre information au sens de Shannon et pertinence diagnostique
+
+### Le piège conceptuel
+
+La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
+
+**Mais attention :** En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique).
+
+### Les quatre cas possibles
+
+| | **Symptôme fréquent** (p élevé) | **Symptôme rare** (p faible) |
+|---|---|---|
+| **Symptôme spécifique**<br>(peu de diagnostics compatibles) | 📉 **Faible** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Fièvre dans la grippe*<br>Symptôme banal mais qui oriente bien | 📈 **Haute** information Shannon<br>✅ **Haute** pertinence diagnostique<br><br>*Exemple : Éruption lupique pathognomonique*<br>Rare ET spécifique = diagnostic quasi certain |
+| **Symptôme non spécifique**<br>(beaucoup de diagnostics compatibles) | 📉 **Faible** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Fatigue vague*<br>Banal et compatible avec 100 maladies | 📈 **Haute** information Shannon<br>❌ **Faible** pertinence diagnostique<br><br>*Exemple : Symptôme jamais décrit*<br>Surprenant mais on ne sait pas l'interpréter |
+
+
+
+Les deux concepts sont **indépendants** ! Un symptôme peut être très surprenant (haute information Shannon) sans pour autant réduire l'incertitude diagnostique.
+
+---
+## 📖 Conclusion de ce parcours
+
+La théorie de l'information permet de :
+- ✅ Comprendre comment **mesurer l'information** et la relier au concept d'incertitude
+- ✅ Voir comment les **LLMs optimisent leurs prédictions** avec l'entropie croisée
+
+❌ MAIS La théorie de l'information ne permet **pas** d'évaluer la pertinence de l'information pour le clinicien !!
+
+---
+
 
 ## 🎓 Utilisation pédagogique
 
@@ -176,8 +213,8 @@ Les suggestions d'amélioration sont les bienvenues !
 
 ## 📅 Historique des versions
 
-- **v1.0** (Février 2026) - Version initiale avec 7 sections interactives
-- Ajout images contextuelles Shannon
+- **v1.0** (Février 2026) - Version initiale avec 2 activités interactives
+
 
 ---
 
@@ -187,7 +224,7 @@ Les suggestions d'amélioration sont les bienvenues !
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=flat&logo=githubpages&logoColor=white)
-
+![KaTeX](https://img.shields.io/badge/KaTeX-228B22?style=flat&logo=latex&logoColor=white)
 ---
 
 ⭐ **Si cette activité vous a été utile, n'hésitez pas à mettre une étoile sur le dépôt !**
