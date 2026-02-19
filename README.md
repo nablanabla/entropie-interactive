@@ -1,4 +1,4 @@
-# Découvrir l'Entropie 
+# Les concepts fondamentaux de l'apprentissage machine : entropie et entropie croisée 
 
 [![Deployed](https://img.shields.io/badge/statut-en%20ligne-brightgreen)](https://VOTRE-USERNAME.github.io/entropie-interactive/)
 [![License](https://img.shields.io/badge/license-CC%20BY--NC--SA%204.0-blue)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
@@ -25,7 +25,7 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 </p>
 
 
-Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  "Messages" et "transmetteurs" sont à prendre dans un sens très large, ils peuvent désigner :
+Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  
 
 
 
@@ -34,6 +34,8 @@ Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un cé
   <br>
   <em>Figure 2 : Le problème initial de Shannon (1948).</em>
 </p>
+
+"Messages" et "transmetteurs" sont à prendre dans un sens très large, ils peuvent désigner :
 
 | Messages | Transmetteurs |
 |----------|---------------|
@@ -100,13 +102,13 @@ Deux étudiants en médecine doivent établir un diagnostic différentiel pour u
 
 **Les distributions de probabilité obtenus :**
 
-| | **D₁** | **D₂** | **D₃** | **D₄** | **Caractéristique** |
-|---|---|---|---|---|---|
-| **Expert (P)** | **80%** | 10% | 5% | 5% | Distribution de référence |
-| **Étudiant 1 (Q₁)** | 50% | 20% | 15% | 15% | *Approche prudente, sous-estime modérément D₁* |
-| **Étudiant 2 (Q₂)** | 15% | 35% | 25% | 25% | *Erreur majeure : pense que D₁ est peu probable !* |
+| | **D₁** | **D₂** | **D₃** | **D₄** | 
+|---|---|---|---|---|
+| **Expert (P)** | **80%** | 10% | 5% | 5% | 
+| **Étudiant 1 (R1)** | 50% | 20% | 15% | 15% | 
+| **Étudiant 2 (R2)** | 25% | 25% | 25% | 25% | 
 
-**Question : quel étudiant est le plus proche de l'expert ?**
+**Questions : 1/ quel étudiant est le plus proche de l'expert ? et 2/ À quel point le plus loin est loin ?**
 Pour y répondre passer à l'activité 2:
 
 <p align="center">
