@@ -21,7 +21,7 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 <p align="center">
   <img src="assets/images/Image1.jpg" alt="Shannon Schema" width="400">
   <br>
-  <em>Figure 1 : Schéma de communication de Shannon (1948)</em>
+  <em>Figure 1 : L'article fondateur de Shannon (1948)</em>
 </p>
 
 
