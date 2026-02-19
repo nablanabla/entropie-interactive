@@ -144,7 +144,7 @@ La théorie de Shannon mesure l'**information** comme la "surprise" : un événe
 
 Les deux concepts sont **indépendants** ! Un symptôme peut être très surprenant (haute information Shannon) sans pour autant réduire l'incertitude diagnostique.
 
-### 📖 Conclusion de ce parcours
+## 📖 Conclusion de ce parcours
 
 La théorie de l'information permet de :
 - ✅ Comprendre comment **mesurer l'information** et la relier au concept d'incertitude
