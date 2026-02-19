@@ -187,7 +187,7 @@ Les suggestions d'amélioration sont les bienvenues !
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222222?style=flat&logo=githubpages&logoColor=white)
-
+![KaTeX](https://img.shields.io/badge/KaTeX-228B22?style=flat&logo=latex&logoColor=white)
 ---
 
 ⭐ **Si cette activité vous a été utile, n'hésitez pas à mettre une étoile sur le dépôt !**
