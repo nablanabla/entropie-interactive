@@ -151,7 +151,7 @@ La théorie de l'information permet de :
 - ✅ Comprendre comment **mesurer l'information** et la relier au concept d'incertitude
 - ✅ Voir comment les **LLMs optimisent leurs prédictions** avec l'entropie croisée
 
-❌ MAISlLa théorie de l'information ne permet **pas** d'évaluer la pertinence de l'information pour le clinicien !!
+❌ MAIS La théorie de l'information ne permet **pas** d'évaluer la pertinence de l'information pour le clinicien !!
 
 ---
 
