@@ -422,17 +422,11 @@
             <div class="formula-box">
                 <p><strong>Entropie croisée entre P (vraie) et Q (prédite) :</strong></p>
                 <div class="formula" style="font-size: 2rem;">
-                    <math display="block">
-                        <mi>H</mi>
-                        <mrow><mo>(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo>)</mo></mrow>
-                        <mo>=</mo>
-                        <mo>-</mo>
-                        <munder><mo>∑</mo><mi>i</mi></munder>
-                        <msub><mi>P</mi><mi>i</mi></msub>
-                        <mo>×</mo>
-                        <msub><mo>log</mo><mn>2</mn></msub>
-                        <mrow><mo>(</mo><msub><mi>Q</mi><mi>i</mi></msub><mo>)</mo></mrow>
-                    </math>
+                    $$H(P,Q) = H(P) + \underbrace{D_{KL}(P \parallel Q)}_{\text{divergence de Kullback-Leibler}}$$
+                </div>
+                <p style="margin-top: 1.5rem;">où</p>
+                <div style="font-size: 1.3rem; margin-top: 1rem;">
+                $$D_{KL}(P \parallel Q) = \sum_i P_i \log_2\frac{P_i}{Q_i}$$
                 </div>
             </div>
 
