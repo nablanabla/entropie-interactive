@@ -418,50 +418,72 @@
                 </ul>
             </div>
 
-            <h3>L'entropie croisée : définition</h3>
+            <h2>🔑 La solution</h2>
+
+            <h3> L'idée de l'<em>entropie croisée</em> est d'ajouter quelque chose à l'entropie apportée par P quand on utilise P au lieu de Q</h3>
+            <h3> Les formules sont écrites à titre indicatif pour formaliser cette idée au coeur de l'apprentissage machine</h3>
             <div class="formula-box">
                 <p><strong>Entropie croisée entre P (vraie) et Q (prédite) :</strong></p>
-                <div style="font-size: 2rem; margin: 1rem 0; text-align: center;">
-                $$H(P,Q) = H(P) + \underbrace{D_{KL}(P \parallel Q)}_{\text{divergence de Kullback-Leibler}}$$
+                <div style="font-size: 1.3rem; margin: 1rem 0;margin-bottom: 3rem; text-align: center;">
+                $$H(P,Q) = \underbrace{H(P)}_{\text{Entropie de la distribution P}} + \underbrace{D_{KL}(P \parallel Q)}_{\text{surplus d'entropie apporté par Q}}$$
                 </div>
-                <p style="margin-top: 1.5rem;">où</p>
-                <div style="font-size: 1.3rem; margin-top: 1rem; text-align: center;">
-                    $$D_{KL}(P \parallel Q) = \sum_i P_i \log_2\frac{P_i}{Q_i}$$
-                </div>
-            </div>
-
-            <div class="info-box">
-                <p><strong>💡 Interprétation :</strong> L'entropie croisée mesure le nombre moyen de bits nécessaires pour encoder des données provenant de la distribution P en utilisant un code optimal pour Q.</p>
-                <p style="margin-top: 1rem;">Plus Q est éloignée de P, plus il faut de bits → plus H(P,Q) est grande.</p>
-            </div>
-
-            <h3>La divergence de Kullback-Leibler</h3>
-            <div class="formula-box">
-                <p><strong>Décomposition :</strong></p>
-                <div class="formula" style="font-size: 1.5rem;">
-                    <math display="block">
-                        <mi>H</mi><mrow><mo>(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo>)</mo></mrow>
-                        <mo>=</mo>
-                        <mi>H</mi><mrow><mo>(</mo><mi>P</mi><mo>)</mo></mrow>
-                        <mo>+</mo>
-                        <msub><mi>D</mi><mi>KL</mi></msub>
-                        <mrow><mo>(</mo><mi>P</mi><mo>||</mo><mi>Q</mi><mo>)</mo></mrow>
-                    </math>
-                </div>
-                <p style="margin-top: 1.5rem;">où</p>
-                <div class="formula" style="font-size: 1.5rem; margin-top: 1rem;">
-                    $$H(P,Q) = -\sum_i P_i \log_2(Q_i)$$
+                
+                <div style="font-size: 1rem; margin-top: 1rem; text-align: left;">
+                     où $D_{KL}(P \parallel Q) = \displaystyle \sum_i P_i \log_2\frac{P_i}{Q_i}$ est la divergence de Kullback-Leibler
                 </div>
             </div>
 
             <div class="info-box">
-                <p><strong>🔑 Propriété fondamentale :</strong> D<sub>KL</sub>(P||Q) ≥ 0</p>
-                <p style="margin-top: 0.5rem;">Et D<sub>KL</sub>(P||Q) = 0 si et seulement si P = Q</p>
-                <p style="margin-top: 1rem;">La divergence KL mesure l'<strong>excès d'information</strong> nécessaire quand on utilise Q au lieu de P.</p>
+                <p><strong>🔑 Propriété fondamentale :</p>
+            
+                <p style="margin-top: 0.5rem;"></p>• $D_{KL}(P \parallel Q)\geq 0$</p>
+                <p style="font-size: 1.3rem;margin-top: 0.5rem;">• $D_{KL}(P \parallel Q)= 0$ si et seulement si P = Q, donc la
+                    divergence de Kullback-Leibler mesure bien à quel point «P est proche de Q»</p>
+            
             </div>
+
+            <div class="info-box">
+                <p><strong>💡 Interprétation :</strong> L'entropie croisée mesure l'<strong>incertitude moyenne</strong> qu'on
+                    ressent quand on utilise une mauvaise distribution (Q) pour prédire des événements qui suivent la vraie
+                    distribution (P).</p>
+                <div class="table-container" style="margin: 1.5rem 0;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cas</th>
+                                <th>Divergence de Kullback-Leibler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Q = P</strong><br><span style="color: var(--text-dim); font-size: 0.9rem;">Prédiction
+                                        parfaite</span></td>
+                                <td style="color: var(--success); font-weight: 600; font-size: 1.1rem;">$D_{KL}(P \parallel Q) = 0$</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Q proche de P</strong><br><span
+                                        style="color: var(--text-dim); font-size: 0.9rem;">Prédiction correcte</span></td>
+                                <td style="color: var(--warning); font-weight: 600; font-size: 1.1rem;">$D_{KL}(P \parallel Q)$ faible
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Q loin de P</strong><br><span style="color: var(--text-dim); font-size: 0.9rem;">Prédiction
+                                        incorrecte</span></td>
+                                <td style="color: var(--accent); font-weight: 600; font-size: 1.1rem;">$D_{KL}(P \parallel Q)$ élevé
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p style="margin-top: 1rem;"><strong>En médecine :</strong> Un étudiant qui se trompe sur les probabilités des
+                    diagnostics devra poser <strong>plus de questions</strong> en moyenne pour arriver au bon diagnostic.
+              
+            </div>
+
+            
 
             <button class="button" onclick="nextSection(2)">Voir un exemple concret →</button>
-        </div>
+        
 
         <!-- Section 2: Cas médical -->
         <div class="section" id="section2">
