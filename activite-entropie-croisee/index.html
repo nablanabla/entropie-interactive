@@ -515,7 +515,7 @@
                 </div>
 
                 <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
-                    <div class="diagnostic-label" style="color: #6a89cc;">Étudiant 1 (R₁)</div>
+                    <div class="diagnostic-label" style="color: #6a89cc;">Étudiant 1</div>
                     <div>0.50</div>
                     <div>0.20</div>
                     <div>0.15</div>
@@ -523,7 +523,7 @@
                 </div>
 
                 <div class="diagnostic-row" style="grid-template-columns: 150px 120px 120px 120px 120px;">
-                    <div class="diagnostic-label" style="color: var(--accent);">Étudiant 2 (R₂)</div>
+                    <div class="diagnostic-label" style="color: var(--accent);">Étudiant 2 </div>
                     <div>0.25</div>
                     <div>0.25</div>
                     <div>0.25</div>
@@ -563,6 +563,12 @@
                     </div>
                 </div>
             </div>
+            <h3>Nous allons comparer deux métriques :</h3>
+            <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 1.8;">
+                <li><strong>Distance L1</strong> : L'écart numérique absolu entre les distributions (approche intuitive)</li>
+                <li><strong>Divergence KL</strong> : L'entropie croisée qui mesure l'écart en termes d'information</li>
+            </ul>
+
 
             <button class="button" onclick="nextSection(3)">Calculer les métriques →</button>
         </div>
@@ -571,8 +577,8 @@
         <div class="section" id="section3">
             <h2>📊 Comparaison des erreurs</h2>
 
-            <h3>Écart en valeur absolue (distance L1)</h3>
-            <p>Somme des différences absolues : |P<sub>i</sub> - R<sub>i</sub>|</p>
+            <h3>Écart en valeur absolue</h3>
+            <p>Somme des différences absolues : |P<sub>i</sub> - Q<sub>i</sub>|</p>
 
             <div class="comparison-grid">
                 <div class="student-card student1">
@@ -599,7 +605,7 @@
             </div>
 
             <h3>Divergence de Kullback-Leibler</h3>
-            <p>D<sub>KL</sub>(P||R) = Σ P<sub>i</sub> × log₂(P<sub>i</sub> / R<sub>i</sub>)</p>
+            <p>$D_{KL}(P \parallel Q) =  \sum_i P_i \log_2\frac{P_i}{Q_i}$</p>
 
             <div class="comparison-grid">
                 <div class="student-card student1">
@@ -684,7 +690,7 @@
                 <p style="margin-top: 1rem;">L'étudiant 2 propose une distribution <strong>uniforme</strong> (25% partout), ignorant complètement la forte probabilité de D₁ !</p>
             </div>
 
-            <h3>Comparaison visuelle : L1 vs KL</h3>
+            <h3>Comparaison visuelle : Distance absolue vs KL</h3>
             <div style="background: white; padding: 2rem; border-radius: 10px; margin: 2rem 0;">
                 <canvas id="logGraph" width="700" height="450" style="max-width: 100%;"></canvas>
             </div>
@@ -693,7 +699,7 @@
                 <p><strong>Interprétation du graphique :</strong></p>
                 <p style="margin-top: 0.5rem;"><strong>Distance L1</strong> (barre bleue) : mesure l'écart absolu total, traite toutes les erreurs également.</p>
                 <p style="margin-top: 0.5rem;"><strong>Divergence KL</strong> (courbe rouge) : pénalise exponentiellement quand on sous-estime un événement probable.</p>
-                <p style="margin-top: 1rem;">Plus le ratio P<sub>i</sub>/R<sub>i</sub> est grand (on sous-estime), plus la pénalité logarithmique explose.</p>
+                <p style="margin-top: 1rem;">Plus le ratio $\frac{P_i}{Q_i}$ est grand, plus la pénalité logarithmique explose.</p>
                 <p style="margin-top: 1rem;">C'est pourquoi l'entropie croisée est une excellente fonction de perte pour l'apprentissage automatique : elle pénalise sévèrement les prédictions confiantes mais fausses.</p>
             </div>
 
@@ -780,14 +786,6 @@
                 <p style="margin-top: 1rem;">Plus le modèle est confiant dans la bonne prédiction, plus la loss est faible.</p>
             </div>
 
-            <h3>Pourquoi la cross-entropy en ML ?</h3>
-            <div class="scenario">
-                <p><strong>✓ Dérivable partout</strong> (essentiel pour la rétropropagation)</p>
-                <p style="margin-top: 0.5rem;"><strong>✓ Pénalise fortement les erreurs confiantes</strong> (comme on l'a vu)</p>
-                <p style="margin-top: 0.5rem;"><strong>✓ Convexe pour les réseaux linéaires</strong> (facilite l'optimisation)</p>
-                <p style="margin-top: 0.5rem;"><strong>✓ Fondement théorique solide</strong> (théorie de l'information)</p>
-            </div>
-
             <button class="button" onclick="completeActivity()">Terminer l'activité →</button>
         </div>
 
@@ -799,21 +797,14 @@
                 <p style="margin-top: 1rem; font-size: 1.2rem;">Vous maîtrisez maintenant le concept d'entropie croisée et son rôle fondamental en apprentissage automatique.</p>
                 
                 <div style="text-align: left; margin-top: 2rem; background: rgba(0, 0, 0, 0.2); padding: 2rem; border-radius: 10px;">
-                    <h3 style="color: var(--warning); margin-top: 0;">🎓 Ce que vous avez appris :</h3>
+                    <h3 style="color: var(--warning); margin-top: 0;">🔗 Ce que vous avez appris :</h3>
                     <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 2;">
                         <li>La définition de l'entropie croisée H(P,Q)</li>
                         <li>La divergence de Kullback-Leibler et sa signification</li>
-                        <li>Pourquoi sous-estimer un événement probable est très coûteux</li>
-                        <li>Comment la cross-entropy guide l'entraînement des LLMs</li>
+                        <li>Pourquoi cette métrique punit la sous-estimation d'un événement probable</li>
+                        <li>Comment l'entropie croisée guide l'entraînement des LLMs</li>
                         <li>Le lien entre théorie de l'information et IA moderne</li>
                     </ul>
-                </div>
-
-                <div class="info-box" style="margin-top: 2rem;">
-                    <p><strong>🔗 Pour aller plus loin :</strong></p>
-                    <p style="margin-top: 0.5rem;">• Explorez comment les Transformers utilisent la cross-entropy pour la génération de texte</p>
-                    <p style="margin-top: 0.5rem;">• Étudiez les variantes : focal loss, label smoothing</p>
-                    <p style="margin-top: 0.5rem;">• Approfondissez la théorie de l'information de Shannon</p>
                 </div>
             </div>
         </div>
@@ -929,7 +920,7 @@
             // Labels
             ctx.fillStyle = '#333';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('Ri (probabilité estimée)', width / 2, height - 20);
+            ctx.fillText('x=probabilité estimée du diagnostique 1', width / 2, height - 20);
             
             ctx.save();
             ctx.translate(25, height / 2);
@@ -968,7 +959,7 @@
             firstPoint = true;
             for (let Ri = xMin; Ri <= xMax; Ri += 0.001) {
                 const kl = Pi * Math.log2(Pi / Ri);
-                if (kl >= 0 && kl <= yMax) {
+                if (kl >= -0.5 && kl <= yMax) {
                     const x = xToCanvas(Ri);
                     const y = yToCanvas(kl);
                     
@@ -1051,7 +1042,7 @@
             ctx.fillStyle = '#333';
             ctx.font = '13px Arial';
             ctx.textAlign = 'left';
-            ctx.fillText('Distance L1: |0.8 - Ri|', legendX + 50, legendY + 5);
+            ctx.fillText('Distance: |0.8 - x|', legendX + 50, legendY + 5);
             
             // KL legend
             ctx.strokeStyle = '#e94560';
@@ -1061,13 +1052,15 @@
             ctx.lineTo(legendX + 40, legendY + 25);
             ctx.stroke();
             ctx.fillStyle = '#333';
-            ctx.fillText('Divergence KL: 0.8 × log₂(0.8/Ri)', legendX + 50, legendY + 30);
+            ctx.fillText('Divergence KL:', legendX + 50, legendY + 25);
+            ctx.font = '11px Arial';
+            ctx.fillText('0.8 × log₂(0.8/x)', legendX + 50, legendY + 40);
             
             // Title
             ctx.fillStyle = '#333';
             ctx.font = 'bold 18px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('Comparaison L1 vs KL pour D₁ (P = 80%)', width / 2, 25);
+            ctx.fillText('Comparaison distance absolue vs KL pour D₁ idéal = 80%', width / 2, 25);
         }
 
         function drawTrainingGraph() {
@@ -1146,13 +1139,13 @@
             // Labels
             ctx.fillStyle = '#333';
             ctx.font = 'bold 16px Arial';
-            ctx.fillText('Époque', width / 2, height - 15);
+            ctx.fillText('Époque (nombre d\'itération)', width / 2, height - 15);
             
             ctx.save();
             ctx.translate(20, height / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'center';
-            ctx.fillText('Cross-Entropy (bits)', 0, 0);
+            ctx.fillText('Entropie croisée (bits)', 0, 0);
             ctx.restore();
             
             // Plot line
