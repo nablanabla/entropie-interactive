@@ -176,8 +176,8 @@ Les suggestions d'amélioration sont les bienvenues !
 
 ## 📅 Historique des versions
 
-- **v1.0** (Février 2026) - Version initiale avec 7 sections interactives
-- Ajout images contextuelles Shannon
+- **v1.0** (Février 2026) - Version initiale avec 2 activités interactives
+
 
 ---
 
