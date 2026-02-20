@@ -125,7 +125,7 @@ Pour y répondre passer à l'activité 2:
 
 ---
 
-## 📚 Pour conclure: Différence entre information au sens de Shannon et pertinence diagnostique
+## 📚 Pour conclure: différence entre information au sens de Shannon et pertinence diagnostique
 
 ### Le piège conceptuel
 
