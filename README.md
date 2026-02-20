@@ -25,7 +25,7 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 </p>
 
 
-Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  
+Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment «peser» l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  
 
 
 
