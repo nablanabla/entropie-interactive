@@ -10,7 +10,7 @@
 
 ## 🎯 Objectif
 
-Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de discuter son application dans le domaine de l'intelligence artificielle.
+Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de son application dans le domaine de l'intelligence artificielle.
 
 
 ---
