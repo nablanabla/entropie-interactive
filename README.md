@@ -131,7 +131,7 @@ Pour y répondre passer à l'activité 2:
 
 La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
 
-**Mais attention :** En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique).
+**Mais attention :** Shannon décorrèle information et sémantique. En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique). L'inverse est vrai !
 
 ### Les quatre cas possibles
 
