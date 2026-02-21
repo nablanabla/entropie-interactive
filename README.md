@@ -45,7 +45,7 @@ Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un cé
 | Des données binaires | Un circuit électrique avec des portes logiques "ouvert/fermé" |
 
 
-La démarche de Shannon est précurseure de l'informatique théorique, dans la forme qu'on lui connaît aujourd'hui - le mot informatique sera introduit bien plus tard dans les années 70. Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au *sens* de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
+La démarche de Shannon est précurseure de l'informatique théorique, dans la forme qu'on lui connaît aujourd'hui - le mot informatique sera introduit bien plus tard dans les années 70. Bien qu'il se focalise sur des problèmes de communication, il donne dans cet article une définition du mot *information* qu'il décorrèle du *sens* de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts centraux. Tout d'abord, l'unité d'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
 
 L'activité consiste à découvrir le point suivant :
 
@@ -55,7 +55,7 @@ L'activité consiste à découvrir le point suivant :
 
 ## 📚 Valeur de l'information et incertitude
 
-L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible. De plus, Shannon fait un astucieux parallèle entre *information* d'un côté et *incertitude* de l'autre: l'incertitude est d'autant plus forte qu'il faut beaucoup d'information pour la combler. 
+L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible. De plus, Shannon fait un astucieux parallèle entre *information* d'un côté et *incertitude* de l'autre: l'incertitude est d'autant plus forte qu'il faut beaucoup d'information pour la diminuer. 
 
 Ces deux remarques sont au coeur de l'apprentissage machine.
 
