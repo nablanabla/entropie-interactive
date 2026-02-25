@@ -952,44 +952,47 @@ Le nombre moyen de question est  1/2 × 1 + ...
         };
 
         function selectOption(element, questionId, isCorrect) {
-            if (answers[questionId].answered) return;
+                // Ne bloquer que si la bonne réponse a déjà été donnée
+                if (answers[questionId].answered && answers[questionId].correct) return;
 
-            // Remove previous selections
-            const options = element.parentElement.querySelectorAll('.option');
-            options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Mark as selected
-            element.classList.add('selected');
-            
-            // Show feedback after a brief delay
-            setTimeout(() => {
-                answers[questionId].answered = true;
-                answers[questionId].correct = isCorrect;
-                
-                if (isCorrect) {
-                    element.classList.add('correct');
-                    correctAnswers++;
-                } else {
-                    element.classList.add('incorrect');
-                }
-                
-                showFeedback(questionId, isCorrect);
-                
-                // Enable next button
-                const sectionNum = questionId.replace('q', '');
-                const mapping = { '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7 };
-                const btnId = `btn-section${mapping[sectionNum]}`;
-                document.getElementById(btnId).disabled = false;
-                
-                // Special reveals
-                if (questionId === 'q4' && isCorrect) {
-                    document.getElementById('formulaReveal').style.display = 'block';
-                }
-                if (questionId === 'q6' && isCorrect) {
-                    document.getElementById('connexionIA').style.display = 'block';
-                }
-            }, 300);
-        }
+                // Remove previous selections
+                const options = element.parentElement.querySelectorAll('.option');
+                options.forEach(opt => opt.classList.remove('selected', 'incorrect'));
+
+                // Mark as selected
+                element.classList.add('selected');
+
+                // Show feedback after a brief delay
+                setTimeout(() => {
+                    if (isCorrect) {
+                        // Bonne réponse : bloquer définitivement
+                        answers[questionId].answered = true;
+                        answers[questionId].correct = true;
+                        element.classList.add('correct');
+                        correctAnswers++;
+
+                        // Enable next button
+                        const sectionNum = questionId.replace('q', '');
+                        const mapping = { '1': 2, '2': 3, '3': 4, '4': 5, '5': 6, '6': 7 };
+                        const btnId = `btn-section${mapping[sectionNum]}`;
+                        document.getElementById(btnId).disabled = false;
+
+                        // Special reveals
+                        if (questionId === 'q4') {
+                            document.getElementById('formulaReveal').style.display = 'block';
+                        }
+                        if (questionId === 'q6') {
+                            document.getElementById('connexionIA').style.display = 'block';
+                        }
+                    } else {
+                        // Mauvaise réponse : permettre de réessayer
+                        element.classList.add('incorrect');
+                        // Ne PAS mettre answered = true ici
+                    }
+
+                    showFeedback(questionId, isCorrect);
+                }, 300);
+            }
 
         function showFeedback(questionId, isCorrect) {
             const feedback = document.getElementById(`feedback-${questionId}`);
