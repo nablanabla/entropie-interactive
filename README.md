@@ -10,7 +10,7 @@
 
 ## 🎯 Objectif
 
-Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de discuter son application dans le domaine de l'intelligence artificielle.
+Cette activité permet de s'initier à la théorie de l'information de Claude Shannon et de son application dans le domaine de l'intelligence artificielle.
 
 
 ---
@@ -25,7 +25,7 @@ Cette activité permet de s'initier à la théorie de l'information de Claude Sh
 </p>
 
 
-Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment peser l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être reproduit pour un récepteur ? (Shannon, 1948, fig.2).  
+Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un célèbre article de 1948, il aborde la question suivante : comment «peser» l'information qui, émise depuis un émetteur sous forme de message, passe dans un canal de diffusion — éventuellement bruité — pour ensuite être acheminée jusqu'à un récepteur ? (Shannon, 1948, fig.2).  
 
 
 
@@ -45,7 +45,7 @@ Shannon est un pionnier involontaire de l'Intelligence Artificielle. Dans un cé
 | Des données binaires | Un circuit électrique avec des portes logiques "ouvert/fermé" |
 
 
-La démarche de Shannon est précurseur de l'informatique théorique, dans la forme qu'on lui connaît maintenant (le mot informatique sera introduit bien plus tard dans les années 70). Bien que centré sur des problèmes de communication, il donne dans cet article un sens au mot information qui n'est pas relié au *sens* de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue à priori information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts majeurs. Tout d'abord, l'unité de l'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
+La démarche de Shannon est précurseure de l'informatique théorique, dans la forme qu'on lui connaît aujourd'hui - le mot informatique sera introduit bien plus tard dans les années 70. Bien qu'il se focalise sur des problèmes de communication, il donne dans cet article une définition du mot *information* qu'il décorrèle du *sens* de cette information. Il faut comprendre l'importance de cette remarque : Shannon distingue information et sémantique, ce qui a été un point de bascule majeur pour le développement de l'informatique. L'article introduit deux concepts centraux. Tout d'abord, l'unité d'information est le *bit* (un nombre décimal). Ensuite, la mesure de l'information sera une fonction mathématique que Shannon décide d'appeler *entropie* en relation avec le concept du même nom en thermodynamique.
 
 L'activité consiste à découvrir le point suivant :
 
@@ -55,7 +55,7 @@ L'activité consiste à découvrir le point suivant :
 
 ## 📚 Valeur de l'information et incertitude
 
-L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible. De plus, Shannon fait un astucieux parallèle entre *information* d'un côté et *incertitude* de l'autre: l'incertitude est d'autant plus forte qu'il faut beaucoup d'information pour la combler. 
+L'observation clé de Shannon est qu'un message est d'autant plus informatif que sa probabilité d'apparaître est faible. De plus, Shannon fait un astucieux parallèle entre *information* d'un côté et *incertitude* de l'autre: l'incertitude est d'autant plus forte qu'il faut beaucoup d'information pour la diminuer. 
 
 Ces deux remarques sont au coeur de l'apprentissage machine.
 
@@ -125,13 +125,13 @@ Pour y répondre passer à l'activité 2:
 
 ---
 
-## 📚 Pour conclure: Différence entre information au sens de Shannon et pertinence diagnostique
+## 📚 Pour conclure: différence entre information au sens de Shannon et pertinence diagnostique
 
 ### Le piège conceptuel
 
 La théorie de Shannon mesure l'**information** comme la "surprise" : un événement rare (p faible) apporte beaucoup d'information car il est inattendu.
 
-**Mais attention :** En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique).
+**Mais attention :** Shannon décorrèle information et sémantique. En médecine, un symptôme peut être très **informatif au sens de Shannon** (rare, surprenant) ET pourtant **peu utile diagnostiquement** (non spécifique). L'inverse est vrai !
 
 ### Les quatre cas possibles
 
@@ -150,8 +150,7 @@ Les deux concepts sont **indépendants** ! Un symptôme peut être très surpren
 La théorie de l'information permet de :
 - ✅ Comprendre comment **mesurer l'information** et la relier au concept d'incertitude
 - ✅ Voir comment les **LLMs optimisent leurs prédictions** avec l'entropie croisée
-
-❌ MAIS La théorie de l'information ne permet **pas** d'évaluer la pertinence de l'information pour le clinicien !!
+- ✅ Comprendre que l'*information* est un concept bien différent pour un informaticien et un clinicien !! 
 
 ---
 
